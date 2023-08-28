@@ -8,24 +8,24 @@ import Button from "./Button";
 const Navbar = () => {
   const navOptions = [
     {
+      path: "/",
       title: "Home",
-      path: "/",
     },
     {
-      title: "About Us",
       path: "/",
+      title: "Free Ebooks",
     },
     {
-      title: "Products",
       path: "/",
+      title: "All Books",
     },
     {
-      title: "Blog",
       path: "/",
+      title: "Pricing",
     },
     {
+      path: "/",
       title: "Contact Us",
-      path: "/",
     },
   ];
 
@@ -78,7 +78,7 @@ const Navbar = () => {
             <div>
               <Button
                 classes={
-                  "hover:bg-[#F55653] hover:text-white font-semibold px-5 py-2 rounded text-[#F55653] border border-[#F55653] "
+                  "hover:bg-[#F55653] hover:text-white font-semibold px-5 py-2 text-[#F55653] border border-[#F55653] "
                 }
               >
                 Login
