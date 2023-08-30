@@ -12,11 +12,11 @@ const Navbar = () => {
       title: "Home",
     },
     {
-      path: "/",
+      path: "/free-ebooks",
       title: "Free Ebooks",
     },
     {
-      path: "/",
+      path: "/all-books",
       title: "All Books",
     },
     {

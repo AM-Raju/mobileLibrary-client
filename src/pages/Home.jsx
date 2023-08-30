@@ -6,7 +6,6 @@ import Membership from "../components/home/Membership";
 import PopularAuthor from "../components/home/PopularAuthor";
 import Testimonials from "../components/home/Testimonials";
 import Newsletter from "../components/home/Newsletter";
-import Footer from "../components/shared/Footer";
 
 const Home = () => {
   return (
@@ -18,7 +17,6 @@ const Home = () => {
       <PopularAuthor></PopularAuthor>
       <Testimonials></Testimonials>
       <Newsletter></Newsletter>
-      <Footer></Footer>
     </div>
   );
 };
