@@ -1,5 +1,6 @@
 import React from "react";
 import book from "../../assets/books/book.jpg";
+import Button from "../shared/Button";
 
 const Ebook = () => {
   return (

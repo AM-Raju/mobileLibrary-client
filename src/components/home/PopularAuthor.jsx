@@ -19,13 +19,7 @@ const PopularAuthor = () => {
           <Author></Author>
         </div>
 
-        <Button
-          classes={
-            "absolute top-0 right-0 bg-[#F55653]  text-center text-lg font-semibold  text-white w-fit py-5 px-10 my-5 "
-          }
-        >
-          See All
-        </Button>
+        <Button addedClasses={"absolute top-0 right-0 w-fit py-5 px-10 my-5"}>See All</Button>
       </div>
     </Container>
   );

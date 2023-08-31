@@ -11,7 +11,7 @@ const Footer = () => {
       <Container>
         <div className="flex flex-col items-center pt-10">
           <Logo></Logo>
-          <p className="w-[700px] text-center py-5">
+          <p className="px-3 md:w-[700px] text-center py-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum veritatis enim corrupti
             alias itaque. Ex necessitatibus sapiente ad ratione id error, iusto qui, quaerat eos
             doloribus dolorum quae voluptate ipsa quis amet. Doloribus assumenda nam eligendi.
@@ -20,13 +20,13 @@ const Footer = () => {
         </div>
       </Container>
       <hr className="w-full" />
-      <div className=" flex justify-between items-center h-12 mx-10">
+      <div className=" lg:flex justify-between items-center lg:h-12 mx-3 md:mx-10">
         {/* Social Icon */}
-        <div className="">
+        <div className="mt-3 lg:mt-0 w-fit mx-auto lg:mx-0">
           <SocialIcon></SocialIcon>
         </div>
         {/* Additional Pages */}
-        <div className="flex gap-5 text-white">
+        <div className="flex flex-wrap justify-center gap-2 lg:gap-5 text-white py-3 lg:mt-0">
           <Link to="#">Home </Link>
           <Link to="#">Privacy Policy </Link>
           <Link to="#">Term and Conditions </Link>

@@ -1,7 +1,13 @@
 import React from "react";
 
-const Button = ({ children, classes }) => {
-  return <div className={classes}>{children}</div>;
+const Button = ({ children, addedClasses }) => {
+  return (
+    <div
+      className={` bg-[#F55653]  text-center text-lg font-semibold  text-white  ${addedClasses}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Button;

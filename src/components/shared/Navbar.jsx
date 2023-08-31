@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Container from "./Container";
 import Logo from "./Logo";
 import Button from "./Button";
+import ButtonOutline from "./ButtonOutline";
 
 const Navbar = () => {
   const navOptions = [
@@ -18,6 +19,10 @@ const Navbar = () => {
     {
       path: "/all-books",
       title: "All Books",
+    },
+    {
+      path: "/all-authors",
+      title: "Authors",
     },
     {
       path: "/",
@@ -76,13 +81,7 @@ const Navbar = () => {
             </nav>
             {/* Button or Search bar part */}
             <div>
-              <Button
-                classes={
-                  "hover:bg-[#F55653] hover:text-white font-semibold px-5 py-2 text-[#F55653] border border-[#F55653] "
-                }
-              >
-                Login
-              </Button>
+              <ButtonOutline addedClass={"px-7 py-2 "}>Login</ButtonOutline>
             </div>
           </div>
         </div>
