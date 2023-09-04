@@ -6,6 +6,9 @@ import AllBooks from "../pages/AllBooks";
 import ErrorPage from "../pages/ErrorPage";
 import AllAuthors from "../pages/AllAuthors";
 import BookDetails from "../pages/BookDetails";
+import MembershipPlan from "../pages/MembershipPlan";
+import Signup from "../pages/Signup";
+import Login from "../pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +35,18 @@ const router = createBrowserRouter([
       {
         path: "/all-authors",
         element: <AllAuthors></AllAuthors>,
+      },
+      {
+        path: "/pricing",
+        element: <MembershipPlan></MembershipPlan>,
+      },
+      {
+        path: "/signup",
+        element: <Signup></Signup>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
       },
     ],
   },

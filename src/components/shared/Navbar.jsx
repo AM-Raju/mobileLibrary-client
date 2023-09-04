@@ -25,12 +25,20 @@ const Navbar = () => {
       title: "Authors",
     },
     {
-      path: "/",
+      path: "/pricing",
       title: "Pricing",
     },
     {
       path: "/",
       title: "Contact Us",
+    },
+    {
+      path: "/signup",
+      title: "Sign Up",
+    },
+    {
+      path: "/login",
+      title: "Login",
     },
   ];
 
