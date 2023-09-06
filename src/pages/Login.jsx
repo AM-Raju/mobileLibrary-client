@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Container from "../components/shared/Container";
 import Logo from "../components/shared/Logo";
 import SocialIcon from "../components/shared/SocialIcon";
 import { useForm } from "react-hook-form";
 import googleLogo from "../assets/icons/google.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import SocialLogin from "../components/shared/SocialLogin";
 
 const Login = () => {
+  const { user, loading, setLoading, login } = useContext(AuthContext);
+  /* States */
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("Login data", data);
+    const { email, password } = data;
+
+    login(email, password)
+      .then((result) => {
+        console.log("Logged User", result.user);
+        setLoading(false);
+        reset();
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+        reset();
+      });
   };
   return (
     <Container>
@@ -72,12 +92,7 @@ const Login = () => {
             </div>
           </form>
           {/* Social Login */}
-          <div className="relative mt-3">
-            <img className="absolute w-12 bg-white h-[46px] p-1" src={googleLogo} alt="" />
-            <button className="border w-full py-2 text-xl hover:bg-blue-500 hover:border-blue-500">
-              Google Login
-            </button>
-          </div>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </Container>

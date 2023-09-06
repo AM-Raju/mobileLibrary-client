@@ -1,12 +1,27 @@
-import React, { useState } from "react";
-import { FaBars, FaConfluence, FaX } from "react-icons/fa6";
+import React, { useContext, useState } from "react";
+import { FaBars, FaRegCircleUser, FaX } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Container from "./Container";
 import Logo from "./Logo";
-import Button from "./Button";
 import ButtonOutline from "./ButtonOutline";
+import { AuthContext } from "../../providers/AuthProvider";
+
+import userImage from "../../assets/author/author.jpg";
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+
+  /* States */
+  const [open, setOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        alert("SignOut Successful");
+      })
+      .catch((error) => console.log(error.message));
+  };
+
   const navOptions = [
     {
       path: "/",
@@ -32,17 +47,8 @@ const Navbar = () => {
       path: "/",
       title: "Contact Us",
     },
-    {
-      path: "/signup",
-      title: "Sign Up",
-    },
-    {
-      path: "/login",
-      title: "Login",
-    },
   ];
 
-  const [open, setOpen] = useState(false);
   return (
     <div className="py-2 border border-gray-200 border-x-0 mt-10">
       <Container>
@@ -87,10 +93,62 @@ const Navbar = () => {
                 ))}
               </ul>
             </nav>
-            {/* Button or Search bar part */}
-            <div>
-              <ButtonOutline addedClass={"px-7 py-2 "}>Login</ButtonOutline>
+            {/* User or Button or Search bar part */}
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-9 rounded-full">
+                  {user ? (
+                    <img src={userImage} />
+                  ) : (
+                    <FaRegCircleUser className="text-4xl text-red-500"></FaRegCircleUser>
+                  )}
+                </div>
+              </label>
+              <ul tabIndex={0} className="mt-3 z-10 p-2 shadow dropdown-content bg-base-100  w-52">
+                {user ? (
+                  <>
+                    <li>
+                      <ButtonOutline path={"/dashboard/"} addedClass={"w-full py-1"}>
+                        Dashboard
+                      </ButtonOutline>
+                    </li>
+                    <li className="mt-2">
+                      <ButtonOutline onClick={handleLogout} addedClass={"w-full py-1"}>
+                        Sign Out
+                      </ButtonOutline>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <ButtonOutline path={"/login"} addedClass={" w-full py-1 "}>
+                        Login
+                      </ButtonOutline>
+                    </li>
+                    <li className="mt-2">
+                      <ButtonOutline path={"/signup"} addedClass={"w-full py-1"}>
+                        Sign Up
+                      </ButtonOutline>
+                    </li>
+                  </>
+                )}
+              </ul>
             </div>
+            {/*             <div>
+              <ButtonOutline path={"/login"} addedClass={"px-7 py-2 "}>
+                Login
+              </ButtonOutline>
+            </div>
+            <div>
+              <ButtonOutline path={"/signup"} addedClass={"px-7 py-2 "}>
+                Sign Up
+              </ButtonOutline>
+            </div>
+            <div>
+              <ButtonOutline path={"/"} addedClass={"px-7 py-2 "}>
+                Dashboard
+              </ButtonOutline>
+            </div> */}
           </div>
         </div>
       </Container>

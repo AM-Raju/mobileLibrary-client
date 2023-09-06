@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Container from "../components/shared/Container";
 import Logo from "../components/shared/Logo";
 import SocialIcon from "../components/shared/SocialIcon";
 import { useForm } from "react-hook-form";
-import googleLogo from "../assets/icons/google.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import SocialLogin from "../components/shared/SocialLogin";
 
 const Signup = () => {
+  const { createUser, loading, setLoading } = useContext(AuthContext);
+  /* States */
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("Signup page", data);
+    const { email, password } = data;
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        setSuccess("User Registration Successful");
+        reset();
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        reset();
+        setLoading(false);
+      });
   };
   return (
     <Container>
@@ -38,6 +57,7 @@ const Signup = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="w-full">
+              {/* Name block */}
               <label htmlFor="">Name</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -46,10 +66,12 @@ const Signup = () => {
                 placeholder="Name"
               />
             </div>
-            <div>
+            {/* Image block */}
+            {/* <div>
               <label htmlFor="">User Photo</label>
               <input className="mt-1 block" {...register("image")} type="file" />
-            </div>
+            </div> */}
+            {/* Email block */}
             <div className="w-full">
               <label htmlFor="">Email</label>
               <input
@@ -59,6 +81,7 @@ const Signup = () => {
                 placeholder="Email Here"
               />
             </div>
+            {/* Password block */}
             <div className="w-full">
               <label htmlFor="">Password</label>
               <input
@@ -85,12 +108,9 @@ const Signup = () => {
             </div>
           </form>
           {/* Social Login */}
-          <div className="relative mt-3">
-            <img className="absolute w-12 bg-white h-[46px] p-1" src={googleLogo} alt="" />
-            <button className="border w-full py-2 text-xl hover:bg-blue-500 hover:border-blue-500">
-              Google Login
-            </button>
-          </div>
+          <SocialLogin></SocialLogin>
+          <p className="text-green-500 text-sm">{success}</p>
+          <p className="text-red-400 text-sm">{error}</p>
         </div>
       </div>
     </Container>

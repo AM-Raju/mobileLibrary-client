@@ -17,7 +17,9 @@ const FreeEbooks = () => {
           <Ebook></Ebook>
           <Ebook></Ebook>
         </div>
-        <ButtonOutline addedClass={"w-52 mt-10 py-3"}>Explore More</ButtonOutline>
+        <div className="w-52 mx-auto">
+          <ButtonOutline addedClass={"w-full mt-10 py-3"}>Explore More</ButtonOutline>
+        </div>
       </div>
     </Container>
   );
