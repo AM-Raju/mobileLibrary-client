@@ -2,8 +2,13 @@ import React, { useContext, useState } from "react";
 
 import googleLogo from "../../assets/icons/google.png";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SocialLogin = () => {
+  // hooks
+  const [axiosSecure] = useAxiosSecure();
+
+  // AuthContext
   const { googleLogin, setLoading } = useContext(AuthContext);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -12,6 +17,10 @@ const SocialLogin = () => {
       .then((result) => {
         console.log("Google User", result.user);
         setSuccess("Google login, Successful!");
+        // Sending request to server to save new user
+        axiosSecure
+          .put("/users", { email: result.user.email })
+          .then((res) => console.log("social", res));
         setLoading(false);
       })
       .catch((error) => {

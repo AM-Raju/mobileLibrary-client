@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import SocialLogin from "../components/shared/SocialLogin";
+import { toast } from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Signup = () => {
   const { createUser, loading, setLoading } = useContext(AuthContext);
-  /* States */
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+
+  // Hooks
+  const [axiosSecure] = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -21,15 +23,36 @@ const Signup = () => {
   const onSubmit = (data) => {
     console.log("Signup page", data);
     const { email, password } = data;
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        setSuccess("User Registration Successful");
-        reset();
-        setLoading(false);
+
+    const user = { email: email, role: "user" };
+
+    // Sending user data to the server
+    axiosSecure
+      .post("/users", user)
+      .then((res) => {
+        console.log("res from signup", res);
+        if (res.data.message) {
+          toast.error(res.data.message);
+          reset();
+          setLoading(false);
+        }
+        if (res.data.insertedId) {
+          // Create firebase user
+          createUser(email, password)
+            .then((res) => {
+              toast.success("Registration successful");
+              reset();
+              setLoading(false);
+            })
+            .catch((err) => {
+              toast.error(err.message);
+              reset();
+              setLoading(false);
+            });
+        }
       })
       .catch((error) => {
-        setError(error.message);
+        toast.error(error.message);
         reset();
         setLoading(false);
       });
@@ -109,8 +132,6 @@ const Signup = () => {
           </form>
           {/* Social Login */}
           <SocialLogin></SocialLogin>
-          <p className="text-green-500 text-sm">{success}</p>
-          <p className="text-red-400 text-sm">{error}</p>
         </div>
       </div>
     </Container>

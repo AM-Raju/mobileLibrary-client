@@ -4,12 +4,14 @@ import Logo from "../components/shared/Logo";
 import SocialIcon from "../components/shared/SocialIcon";
 import { useForm } from "react-hook-form";
 import googleLogo from "../assets/icons/google.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import SocialLogin from "../components/shared/SocialLogin";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const { user, loading, setLoading, login } = useContext(AuthContext);
+  const navigate = useNavigate();
   /* States */
   const [error, setError] = useState("");
   const {
@@ -26,8 +28,10 @@ const Login = () => {
     login(email, password)
       .then((result) => {
         console.log("Logged User", result.user);
-        setLoading(false);
+        toast.success("Login Successful");
         reset();
+        setLoading(false);
+        navigate("/");
       })
       .catch((error) => {
         setError(error.message);

@@ -35,6 +35,11 @@ const DashboardNav = () => {
           </Link>
         </li>
         <li>
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/add-author">
+            Add Author
+          </Link>
+        </li>
+        <li>
           <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/issue-books">
             Issue Books
           </Link>

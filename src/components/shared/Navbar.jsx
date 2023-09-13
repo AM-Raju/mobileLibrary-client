@@ -7,6 +7,7 @@ import ButtonOutline from "./ButtonOutline";
 import { AuthContext } from "../../providers/AuthProvider";
 
 import userImage from "../../assets/author/author.jpg";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout()
       .then(() => {
-        alert("SignOut Successful");
+        toast.success("Succesful signout");
       })
       .catch((error) => console.log(error.message));
   };
