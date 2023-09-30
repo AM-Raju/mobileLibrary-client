@@ -3,7 +3,7 @@ import Container from "../components/shared/Container";
 import Logo from "../components/shared/Logo";
 import SocialIcon from "../components/shared/SocialIcon";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import SocialLogin from "../components/shared/SocialLogin";
 import { toast } from "react-hot-toast";
@@ -11,6 +11,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Signup = () => {
   const { createUser, loading, setLoading } = useContext(AuthContext);
+  const navigation = useNavigate();
 
   // Hooks
   const [axiosSecure] = useAxiosSecure();
@@ -24,7 +25,7 @@ const Signup = () => {
     console.log("Signup page", data);
     const { email, password } = data;
 
-    const user = { email: email, role: "user" };
+    const user = { email: email, role: "reader" };
 
     // Sending user data to the server
     axiosSecure
@@ -43,6 +44,7 @@ const Signup = () => {
               toast.success("Registration successful");
               reset();
               setLoading(false);
+              navigation("/");
             })
             .catch((err) => {
               toast.error(err.message);

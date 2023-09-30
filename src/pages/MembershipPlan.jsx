@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../components/shared/Banner";
 import membershipBanner from "../assets/banner/membershipBanner.jpg";
 import Container from "../components/shared/Container";
 
 import Plan from "./Plan";
+import Modal from "../components/shared/Modal";
 
 const MembershipPlan = () => {
   const features = {
@@ -17,6 +18,13 @@ const MembershipPlan = () => {
       "* Special Gift Coupon",
     ],
   };
+
+  const [fees, setFees] = useState(null);
+
+  const showMyModal = (fees) => {
+    setFees(fees);
+    document.getElementById("my_modal_5").showModal();
+  };
   return (
     <div>
       <Banner banner={membershipBanner}>Membership Plan</Banner>
@@ -27,24 +35,28 @@ const MembershipPlan = () => {
             title={"Basic"}
             pricing={"Free"}
             color={"[#339DB3]"}
+            showMyModal={showMyModal}
           ></Plan>
           <Plan
             basicFeatures={features.Standard}
             title={"Standard"}
-            pricing={"$100/Year"}
+            pricing={100}
             color={"[#3E73A7]"}
+            showMyModal={showMyModal}
           ></Plan>
           <Plan
             basicFeatures={features.Premium}
             title={"Premium"}
-            pricing={"$150/Year"}
+            pricing={150}
             color={"[#F55653]"}
+            showMyModal={showMyModal}
           ></Plan>
         </div>
         <p className="text-red-500 mb-10">
           * Top 20 readers/category will be eligible for gift coupon each year.
         </p>
       </Container>
+      <Modal fees={fees}></Modal>
     </div>
   );
 };

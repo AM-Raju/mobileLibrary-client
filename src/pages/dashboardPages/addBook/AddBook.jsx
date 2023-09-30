@@ -1,13 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { imageUpload } from "../../../api/utils";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
+import { ImSpinner9 } from "react-icons/im";
 
 const AddBook = () => {
+  const [axiosSecure] = useAxiosSecure();
+  const [bookLoading, setBookLoading] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const handleAddBook = (bookData) => console.log(bookData);
+  const handleAddBook = (bookData) => {
+    setBookLoading(true);
+    console.log(bookData);
+    const {
+      title,
+      authorName,
+      image,
+      category,
+      format,
+      publishedYear,
+      lastEdition,
+      numOfPages,
+      desc,
+      quantity,
+    } = bookData;
+
+    if (image.length > 0) {
+      // Get image url from imgbb
+      imageUpload(image[0]).then((data) => {
+        console.log("dhaka", data.data.display_url);
+        const imageUrl = data.data.display_url;
+        // Get author id
+        if (imageUrl) {
+          axiosSecure.get(`/authors?name=${authorName}`).then((data) => {
+            const authorId = data.data._id;
+            if (authorId) {
+              const bookInfo = {
+                title,
+                cover: imageUrl,
+                authorId,
+                category,
+                format,
+                publishedYear: parseInt(publishedYear),
+                lastEdition: parseInt(lastEdition),
+                numOfPages: parseInt(numOfPages),
+                desc,
+                quantity: parseInt(quantity),
+              };
+              // Upload book data to the server
+              axiosSecure
+                .post("/books", bookInfo)
+                .then((data) => {
+                  console.log(data.data);
+                  if (data.data.insertedId) {
+                    toast.success("Book data uploaded successfully");
+                    reset();
+                    setBookLoading(false);
+                  } else {
+                    // Book exist error message
+                    toast.error(data.data.message);
+                    setBookLoading(false);
+                  }
+                })
+                .catch((error) => console.log(error.message));
+            } else {
+              // Author not found error
+              toast.error(data.data.message);
+              setBookLoading(false);
+            }
+          });
+        }
+      });
+    } else {
+      toast.error("Book cover missing!");
+      setBookLoading(false);
+    }
+
+    //
+  };
   return (
     <section className="py-10 h-full bg-slate-300">
       <h2 className="text-5xl text-center font-semibold ">Add Book</h2>
@@ -54,17 +129,34 @@ const AddBook = () => {
               <label htmlFor="">Category</label>
               <select
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
-                {...register("Title", { required: true })}
+                {...register("category", { required: true })}
               >
-                <option value="">Select Category</option>
-                <option value="novel">Novel</option>
-                <option value="science fiction">Science Fiction</option>
-                <option value="travel">Travel</option>
-                <option value="romantic novel">Romantic Novel</option>
+                <option value="none">Select Category</option>
+                <option value="Biographies & Memoirs">Biographies & Memoirs</option>
+                <option value="science">Science</option>
+                <option value="Art and Photography">Art and Photography</option>
+                <option value="Motivation">Motivation</option>
+                <option value="Kids and Children">Kids and Children</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Business & Money">Business & Money</option>
+                <option value="Computer & Technology Books">Computer & Technology Books</option>
+              </select>
+            </div>
+            {/* Format */}
+            <div className="w-1/4">
+              <label htmlFor="">Format</label>
+              <select
+                className="px-3 py-2 w-full mt-1 outline-none text-black"
+                {...register("format", { required: true })}
+              >
+                <option value="none">Select Format</option>
+                <option value="ebook">Ebook</option>
+                <option value="hard cover">Hard Cover</option>
+                <option value="paperback">Paperback</option>
               </select>
             </div>
             {/* Published year */}
-            <div className="w-1/4">
+            <div className="w-1/6">
               <label htmlFor="">Published</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -74,23 +166,33 @@ const AddBook = () => {
               />
             </div>
             {/* last edition */}
-            <div className="w-1/4">
+            <div className="w-1/6">
               <label htmlFor="">Last Edition</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="number"
-                {...register("edition")}
+                {...register("lastEdition")}
                 placeholder="Last Edition"
               />
             </div>
             {/* Pages */}
-            <div className="w-1/4">
+            <div className="w-1/6">
               <label htmlFor="">Number of Pages</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="number"
                 {...register("numOfPages")}
                 placeholder="Number of Pages"
+              />
+            </div>
+            {/* Quantity */}
+            <div className="w-1/6">
+              <label htmlFor="">Quantity</label>
+              <input
+                className="px-3 py-2 w-full mt-1 outline-none text-black"
+                type="number"
+                {...register("quantity")}
+                placeholder="Quantity"
               />
             </div>
           </div>
@@ -104,8 +206,18 @@ const AddBook = () => {
               placeholder="Short Description"
             />
           </div>
-          <div className="bg-yellow-500 w-44 font-semibold mx-auto mt-5 py-3 text-center">
-            <input type="submit" value="Add Book" />
+          <div className=" w-44 font-semibold mx-auto mt-5  text-center">
+            {bookLoading ? (
+              <div className="bg-yellow-500 cursor-pointer py-2">
+                <ImSpinner9 className="  w-full  text-white animate-spin" size={28}></ImSpinner9>
+              </div>
+            ) : (
+              <input
+                className="w-full bg-yellow-500 cursor-pointer py-3 px-5"
+                type="submit"
+                value="Add Book"
+              />
+            )}
           </div>
         </form>
       </div>

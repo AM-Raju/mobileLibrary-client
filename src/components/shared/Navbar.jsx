@@ -33,8 +33,8 @@ const Navbar = () => {
       title: "Free Ebooks",
     },
     {
-      path: "/all-books",
-      title: "All Books",
+      path: "/special-books",
+      title: "Special Books",
     },
     {
       path: "/all-authors",
@@ -45,7 +45,7 @@ const Navbar = () => {
       title: "Pricing",
     },
     {
-      path: "/",
+      path: "#",
       title: "Contact Us",
     },
   ];
@@ -95,45 +95,51 @@ const Navbar = () => {
               </ul>
             </nav>
             {/* User or Button or Search bar part */}
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-9 rounded-full">
+            <div className="flex items-center">
+              <div>{user?.email}</div>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-9 rounded-full">
+                    {user ? (
+                      <img src={user?.photoURL} />
+                    ) : (
+                      <FaRegCircleUser className="text-4xl text-red-500"></FaRegCircleUser>
+                    )}
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 z-10 p-2 shadow dropdown-content bg-base-100  w-52"
+                >
                   {user ? (
-                    <img src={userImage} />
+                    <>
+                      <li>
+                        <ButtonOutline path={"/dashboard/"} addedClass={"w-full py-1"}>
+                          Dashboard
+                        </ButtonOutline>
+                      </li>
+                      <li className="mt-2">
+                        <ButtonOutline onClick={handleLogout} addedClass={"w-full py-1"}>
+                          Sign Out
+                        </ButtonOutline>
+                      </li>
+                    </>
                   ) : (
-                    <FaRegCircleUser className="text-4xl text-red-500"></FaRegCircleUser>
+                    <>
+                      <li>
+                        <ButtonOutline path={"/login"} addedClass={" w-full py-1 "}>
+                          Login
+                        </ButtonOutline>
+                      </li>
+                      <li className="mt-2">
+                        <ButtonOutline path={"/signup"} addedClass={"w-full py-1"}>
+                          Sign Up
+                        </ButtonOutline>
+                      </li>
+                    </>
                   )}
-                </div>
-              </label>
-              <ul tabIndex={0} className="mt-3 z-10 p-2 shadow dropdown-content bg-base-100  w-52">
-                {user ? (
-                  <>
-                    <li>
-                      <ButtonOutline path={"/dashboard/"} addedClass={"w-full py-1"}>
-                        Dashboard
-                      </ButtonOutline>
-                    </li>
-                    <li className="mt-2">
-                      <ButtonOutline onClick={handleLogout} addedClass={"w-full py-1"}>
-                        Sign Out
-                      </ButtonOutline>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <ButtonOutline path={"/login"} addedClass={" w-full py-1 "}>
-                        Login
-                      </ButtonOutline>
-                    </li>
-                    <li className="mt-2">
-                      <ButtonOutline path={"/signup"} addedClass={"w-full py-1"}>
-                        Sign Up
-                      </ButtonOutline>
-                    </li>
-                  </>
-                )}
-              </ul>
+                </ul>
+              </div>
             </div>
             {/*             <div>
               <ButtonOutline path={"/login"} addedClass={"px-7 py-2 "}>

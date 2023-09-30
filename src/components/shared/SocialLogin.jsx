@@ -1,26 +1,44 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import googleLogo from "../../assets/icons/google.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   // hooks
   const [axiosSecure] = useAxiosSecure();
+  const navigate = useNavigate();
 
   // AuthContext
   const { googleLogin, setLoading } = useContext(AuthContext);
-  const [success, setSuccess] = useState("");
+
   const [error, setError] = useState("");
+
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
         console.log("Google User", result.user);
-        setSuccess("Google login, Successful!");
+
         // Sending request to server to save new user
+
         axiosSecure
-          .put("/users", { email: result.user.email })
-          .then((res) => console.log("social", res));
+          .post("/users", {
+            email: result?.user?.email,
+            name: result?.user?.displayName,
+            photo: result?.user?.photoURL,
+            role: "user",
+          })
+          .then((res) => {
+            if (res.data.insertedId) {
+              toast.success("Google Login Successful");
+              navigate("/");
+            } else {
+              toast.error(res.data.message);
+            }
+          });
+
         setLoading(false);
       })
       .catch((error) => {
@@ -39,7 +57,6 @@ const SocialLogin = () => {
           Google Login
         </button>
       </div>
-      <p className="text-green-500 text-sm">{success}</p>
       <p className="text-red-400 text-sm">{error}</p>
     </div>
   );
