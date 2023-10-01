@@ -9,10 +9,9 @@ import {
   signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
-
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { getUserRole } from "../api/users";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -20,16 +19,24 @@ const googleAuth = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   /* Hook */
-  // const [axiosSecure] = useAxiosSecure();
+
   /* State */
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState(null);
 
   /* Create user with email and password */
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  // get user role
+  useEffect(() => {
+    if (user) {
+      getUserRole(user?.email).then((data) => setRole(data));
+    }
+  }, [user]);
 
   /* Login */
   const login = (email, password) => {
@@ -75,6 +82,7 @@ const AuthProvider = ({ children }) => {
     login,
     googleLogin,
     logout,
+    role,
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

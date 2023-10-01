@@ -66,7 +66,6 @@ const AllBooksData = () => {
             placeholder="Search Books"
           />
         </form>
-
         <div className="overflow-x-auto">
           <table className="table h-fit">
             {/* head */}
