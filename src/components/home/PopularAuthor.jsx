@@ -3,6 +3,7 @@ import Container from "../shared/Container";
 import Author from "../shared/Author";
 import Button from "../shared/Button";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const PopularAuthor = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -27,7 +28,9 @@ const PopularAuthor = () => {
           ))}
         </div>
 
-        <Button addedClasses={"absolute top-0 right-0 w-fit py-5 px-10 my-5"}>See All</Button>
+        <Button path={"/all-authors"} addedClasses={"absolute top-0 right-0 w-fit py-5 px-10 my-5"}>
+          See All
+        </Button>
       </div>
     </Container>
   );

@@ -1,105 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { imageUpload } from "../../../api/utils";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
-import { ImSpinner9 } from "react-icons/im";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const AddBook = () => {
+const UpdateBookModal = ({ book }) => {
   const [axiosSecure] = useAxiosSecure();
-  const [bookLoading, setBookLoading] = useState(false);
+  const [author, setAuthor] = useState({});
+
+  const {
+    title,
+    authorId,
+    cover,
+    category,
+    format,
+    publishedYear,
+    lastEdition,
+    numOfPages,
+    qty,
+    desc,
+  } = book;
+
+  // React hook form
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const handleAddBook = (bookData) => {
-    setBookLoading(true);
-    console.log(bookData);
-    const {
-      title,
-      authorName,
-      image,
-      category,
-      format,
-      publishedYear,
-      lastEdition,
-      numOfPages,
-      desc,
-      quantity,
-    } = bookData;
 
-    if (image.length > 0) {
-      // Get image url from imgbb
-      imageUpload(image[0]).then((data) => {
-        console.log("dhaka", data.data.display_url);
-        const imageUrl = data.data.display_url;
-        // Get author id
-        if (imageUrl) {
-          // console.log("open", authorName);
-          axiosSecure.get(`/author?name=${authorName}`).then((data) => {
-            const authorId = data.data._id;
-            // console.log("Author id", authorId);
-            if (authorId) {
-              const bookInfo = {
-                title,
-                cover: imageUrl,
-                authorId,
-                category,
-                format,
-                publishedYear: parseInt(publishedYear),
-                lastEdition: parseInt(lastEdition),
-                numOfPages: parseInt(numOfPages),
-                desc,
-                quantity: parseInt(quantity),
-              };
-
-              // Upload book data to the server
-              axiosSecure
-                .post("/books", bookInfo)
-                .then((data) => {
-                  console.log(data.data);
-                  if (data.data.insertedId) {
-                    toast.success("Book data uploaded successfully");
-                    reset();
-                    setBookLoading(false);
-                  } else {
-                    // Book exist error message
-
-                    toast.error(data.data.message);
-                    setBookLoading(false);
-                  }
-                })
-                .catch((error) => console.log(error.message));
-            } else {
-              // Author not found error
-
-              toast.error(data.data.message);
-              setBookLoading(false);
-            }
-          });
-        }
-      });
-    } else {
-      toast.error("Book cover missing!");
-      setBookLoading(false);
-    }
-
-    //
-  };
+  const handleUpdateBook = () => {};
   return (
-    <section className="py-10 h-full bg-slate-300">
-      <h2 className="text-5xl text-center font-semibold ">Add Book</h2>
-      <div className=" max-w-7xl mx-auto p-10 bg-orange-500 mt-10">
-        {/* Add book form */}
-        <form className="" onSubmit={handleSubmit(handleAddBook)}>
+    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle  w-screen">
+      <div className="bg-green-300 w-8/12 p-10">
+        {/* Update form */}
+        <form className="" onSubmit={handleSubmit(handleUpdateBook)}>
           {/* Block One */}
           <div className="w-full flex gap-5">
             {/* book name */}
             <div className="w-1/2">
               <label htmlFor="">Book Title</label>
               <input
+                defaultValue={title}
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="text"
                 {...register("title")}
@@ -110,6 +50,7 @@ const AddBook = () => {
             <div className="w-1/3">
               <label htmlFor="">Author</label>
               <input
+                defaultValue={author.name}
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="text"
                 {...register("authorName")}
@@ -136,7 +77,9 @@ const AddBook = () => {
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 {...register("category", { required: true })}
               >
-                <option value="none">Select Category</option>
+                <option defaultValue={category} value="none">
+                  {category}
+                </option>
                 <option value="Biographies & Memoirs">Biographies & Memoirs</option>
                 <option value="science">Science</option>
                 <option value="Art and Photography">Art and Photography</option>
@@ -154,7 +97,9 @@ const AddBook = () => {
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 {...register("format", { required: true })}
               >
-                <option value="none">Select Format</option>
+                <option defaultValue={format} value="none">
+                  {format}
+                </option>
                 <option value="ebook">Ebook</option>
                 <option value="hard cover">Hard Cover</option>
                 <option value="paperback">Paperback</option>
@@ -164,6 +109,7 @@ const AddBook = () => {
             <div className="w-1/6">
               <label htmlFor="">Published</label>
               <input
+                defaultValue={publishedYear}
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="number"
                 {...register("publishedYear")}
@@ -174,6 +120,7 @@ const AddBook = () => {
             <div className="w-1/6">
               <label htmlFor="">Last Edition</label>
               <input
+                defaultValue={lastEdition}
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="number"
                 {...register("lastEdition")}
@@ -184,6 +131,7 @@ const AddBook = () => {
             <div className="w-1/6">
               <label htmlFor="">Number of Pages</label>
               <input
+                defaultValue={numOfPages}
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="number"
                 {...register("numOfPages")}
@@ -194,6 +142,7 @@ const AddBook = () => {
             <div className="w-1/6">
               <label htmlFor="">Quantity</label>
               <input
+                defaultValue={qty}
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
                 type="number"
                 {...register("quantity")}
@@ -206,13 +155,14 @@ const AddBook = () => {
           <div>
             <label htmlFor="">Sort Description</label>
             <textarea
+              defaultValue={desc}
               className="px-3 py-2 w-full h-28 mt-1 outline-none text-black"
               {...register("desc", {})}
               placeholder="Short Description"
             />
           </div>
           <div className=" w-44 font-semibold mx-auto mt-5  text-center">
-            {bookLoading ? (
+            {/*   {bookLoading ? (
               <div className="bg-yellow-500 cursor-pointer py-2">
                 <ImSpinner9 className="  w-full  text-white animate-spin" size={28}></ImSpinner9>
               </div>
@@ -222,12 +172,18 @@ const AddBook = () => {
                 type="submit"
                 value="Add Book"
               />
-            )}
+            )} */}
           </div>
         </form>
+        <div className="modal-action">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn">Close</button>
+          </form>
+        </div>
       </div>
-    </section>
+    </dialog>
   );
 };
 
-export default AddBook;
+export default UpdateBookModal;

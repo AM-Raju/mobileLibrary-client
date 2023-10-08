@@ -6,7 +6,7 @@ const SingleAuthorCard = ({ author }) => {
   return (
     <div className="w-36 h-fit p-2 border hover:border-red-500 group ease-in duration-500">
       <img
-        className="w-28 p-1 h-28 bg-white group-hover:bg-red-500 border  rounded-full mx-auto ease-in duration-500"
+        className="w-28 p-1 h-28 bg-white group-hover:bg-[#F55653] border  rounded-full mx-auto ease-in duration-500"
         src={image}
         alt=""
       />

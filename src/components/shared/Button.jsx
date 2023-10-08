@@ -1,12 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Button = ({ children, addedClasses }) => {
+const Button = ({ path, children, addedClasses, openModal }) => {
   return (
-    <button
-      className={` bg-[#F55653]  text-center text-lg font-semibold  text-white cursor-pointer  ${addedClasses}`}
-    >
-      {children}
-    </button>
+    <Link to={path}>
+      <button
+        onClick={openModal}
+        className={` bg-[#F55653]  text-center text-lg font-semibold  text-white cursor-pointer  ${addedClasses}`}
+      >
+        {children}
+      </button>
+    </Link>
   );
 };
 

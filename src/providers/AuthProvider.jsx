@@ -38,6 +38,8 @@ const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
+  console.log("role", role);
+
   /* Login */
   const login = (email, password) => {
     setLoading(true);

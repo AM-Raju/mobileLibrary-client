@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../shared/Container";
 
 import ButtonOutline from "../shared/ButtonOutline";
+import { Link } from "react-router-dom";
 
 const Membership = () => {
   return (
@@ -10,8 +11,9 @@ const Membership = () => {
       <div className="bg-[#6BAF86] absolute w-full h-full top-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
         <div>
           <h1 className="text-9xl font-semibold text-white">Membership Plan!</h1>
+
           <div className="w-52 mx-auto">
-            <ButtonOutline addedClass={"w-52 mt-10 py-3 text-white border-white"}>
+            <ButtonOutline path={"/pricing"} addedClass={"w-52 mt-10 py-3 text-white border-white"}>
               Explore Now
             </ButtonOutline>
           </div>

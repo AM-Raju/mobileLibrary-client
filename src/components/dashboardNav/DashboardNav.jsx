@@ -13,44 +13,44 @@ const DashboardNav = () => {
         <Link to="/dashboard/">Dashboard</Link>
       </li>
       <div className="">
-        <p>Admin Panel</p>
+        <p className="font-semibold">Admin Panel</p>
         <hr />
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/all-users">
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/all-users">
             All Users
           </Link>
         </li>
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/all-books-data">
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/all-books-data">
             All Books
           </Link>
         </li>
       </div>
       <div>
-        <p>Operator Panel</p>
+        <p className="font-semibold">Operator Panel</p>
         <hr />
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/add-book">
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/add-book">
             Add Book
           </Link>
         </li>
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/add-author">
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/add-author">
             Add Author
           </Link>
         </li>
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/issue-books">
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/issue-books">
             Issue Books
           </Link>
         </li>
       </div>
 
       <div>
-        <p>User Panel</p>
+        <p className="font-semibold">User Panel</p>
         <hr />
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-1" to="/dashboard/my-books">
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/my-books">
             My Books
           </Link>
         </li>

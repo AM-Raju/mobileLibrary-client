@@ -17,7 +17,7 @@ const Modal = ({ fees }) => {
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn">Close</button>
+            <button className="bg-[#F55653] px-5 py-2 rounded-md">Close</button>
           </form>
         </div>
       </div>

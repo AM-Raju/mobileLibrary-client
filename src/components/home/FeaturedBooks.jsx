@@ -4,10 +4,22 @@ import SectionTitle from "../shared/SectionTitle";
 import Book from "../shared/Book";
 import ButtonOutline from "../shared/ButtonOutline";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import RequisitionModal from "../shared/RequisitionModal";
 
 const FeaturedBooks = () => {
   const [axiosSecure] = useAxiosSecure();
+  const [isOpen, setIsOpen] = useState(true);
   const [books, setBooks] = useState([]);
+  const [bookId, setBookId] = useState("");
+
+  const openModal = (_id) => {
+    setBookId(_id);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     axiosSecure.get("/featured-books").then((res) => {
@@ -23,7 +35,7 @@ const FeaturedBooks = () => {
           <SectionTitle headingOne="Featured" headingTwo="Books"></SectionTitle>
           <div className="flex justify-between">
             {books.slice(0, 4).map((book, index) => (
-              <Book key={index} book={book}></Book>
+              <Book key={index} book={book} openModal={openModal}></Book>
             ))}
           </div>
           <div className="w-52 mx-auto">
@@ -33,6 +45,7 @@ const FeaturedBooks = () => {
           </div>
         </div>
       </Container>
+      <RequisitionModal bookId={bookId} isOpen={isOpen} closeModal={closeModal}></RequisitionModal>
     </div>
   );
 };

@@ -4,12 +4,21 @@ import bannerImg from "../assets/banner/allBooksBanner.jpg";
 import Container from "../components/shared/Container";
 import Book from "../components/shared/Book";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import RequisitionModal from "../components/shared/RequisitionModal";
 
 const AllBooks = () => {
   const [axiosSecure] = useAxiosSecure();
+  const [isOpen, setIsOpen] = useState(true);
   const [books, setBooks] = useState([]);
+  const [bookId, setBookId] = useState("");
+  const openModal = (_id) => {
+    setBookId(_id);
+    setIsOpen(true);
+  };
 
-  console.log("bd", books);
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     axiosSecure.get("/featured-books").then((res) => {
@@ -24,10 +33,11 @@ const AllBooks = () => {
       <Container>
         <div className="my-5 grid grid-cols-4 gap-7">
           {books.map((book, index) => (
-            <Book key={index} book={book}></Book>
+            <Book key={index} book={book} openModal={openModal}></Book>
           ))}
         </div>
       </Container>
+      <RequisitionModal bookId={bookId} isOpen={isOpen} closeModal={closeModal}></RequisitionModal>
     </div>
   );
 };

@@ -12,8 +12,7 @@ import { toast } from "react-hot-toast";
 const Login = () => {
   const { user, loading, setLoading, login } = useContext(AuthContext);
   const navigate = useNavigate();
-  /* States */
-  const [error, setError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -34,7 +33,7 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        setError(error.message);
+        toast.error(error.message);
         setLoading(false);
         reset();
       });
@@ -82,7 +81,7 @@ const Login = () => {
 
             <div className="w-full">
               <button
-                className="block hover:bg-red-500 border hover:border-red-500 text-xl text-white px-7 py-2 w-full"
+                className="block hover:bg-[#F55653] border hover:border-red-500 text-xl text-white px-7 py-2 w-full"
                 type="submit"
               >
                 Login

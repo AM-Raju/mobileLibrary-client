@@ -2,23 +2,46 @@ import React, { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaTrash } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 const AllUsers = () => {
   const { user, loading, role } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
-  const [readers, setReaders] = useState([]);
 
-  useEffect(() => {
-    axiosSecure.get("/users").then((res) => {
-      setReaders(res.data);
+  const { data: readers = [], refetch } = useQuery({
+    queryKey: ["users", user?.email],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
+      return res.data;
+    },
+  });
+
+  const makeModerator = (email) => {
+    console.log("reader email", email);
+    axiosSecure.patch(`/user/${email}`).then((res) => {
+      console.log("Make moderaotr", res.data);
+      if (res.data.modifiedCount > 0) {
+        toast.success("Updated to moderator");
+        refetch();
+      }
     });
-  }, []);
+  };
 
-  const makeModerator = (email) => {};
+  const handleDeleteUser = (email) => {
+    axiosSecure.delete(`/users/${email}`).then((res) => {
+      console.log("Delete", res.data);
+      if (res.data.deletedCount > 0) {
+        toast.success("Reader deleted successfully!");
+        refetch();
+      }
+    });
+  };
 
   return (
     <section className="py-10 h-full bg-slate-300">
-      <h2 className="text-5xl text-center font-semibold mb-10">All Books</h2>
+      <h2 className="text-5xl text-center font-semibold mb-10">All Users</h2>
       <div className="w-8/12 mx-auto overflow-x-auto">
         <table className="table h-fit">
           {/* head */}
@@ -56,8 +79,9 @@ const AllUsers = () => {
 
                   <td>
                     <button
+                      onClick={() => handleDeleteUser(reader?.email)}
                       disabled={role !== "admin"}
-                      className="hover:bg-red-500 px-4 py-2 rounded group"
+                      className="hover:bg-[#F55653] px-4 py-2 rounded group"
                     >
                       <FaTrash
                         className={`${

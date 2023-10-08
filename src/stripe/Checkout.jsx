@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "../stripe/checkout.css";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
 
 const Checkout = ({ fees }) => {
   const stripe = useStripe();
@@ -87,9 +88,13 @@ const Checkout = ({ fees }) => {
         }
 
         // Save user info into DB after payment
-        axiosSecure
-          .patch(`/users/${user?.email}`, paymentInfo)
-          .then((res) => console.log("response after payment success", res.data));
+        axiosSecure.patch(`/users/${user?.email}`, paymentInfo).then((res) => {
+          console.log("response after payment success", res.data);
+          if (res.data.modifiedCount > 0) {
+            toast.success("Payment Done");
+            event.target.reset();
+          }
+        });
       }
     }
   };
@@ -112,7 +117,11 @@ const Checkout = ({ fees }) => {
           },
         }}
       />
-      <button type="submit" disabled={!stripe}>
+      <button
+        className="bg-green-500 px-4 py-2 relative top-14 rounded-md"
+        type="submit"
+        disabled={!stripe || !user}
+      >
         Pay ${fees}
       </button>
     </form>
