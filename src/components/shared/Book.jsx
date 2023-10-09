@@ -3,7 +3,6 @@ import book from "../../assets/books/book.jpg";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import AuthorTitleAndCountry from "./AuthorTitleAndCountry";
-import RequisitionModal from "./RequisitionModal";
 
 const Book = ({ book, openModal }) => {
   const { _id, title, cover, qty, authorId } = book;

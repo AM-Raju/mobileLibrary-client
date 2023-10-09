@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Banner from "../components/shared/Banner";
 import bannerImg from "../assets/banner/allBooksBanner.jpg";
 import Container from "../components/shared/Container";
 import Book from "../components/shared/Book";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import RequisitionModal from "../components/shared/RequisitionModal";
+import { AuthContext } from "../providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const AllBooks = () => {
+  const { user } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [books, setBooks] = useState([]);
   const [bookId, setBookId] = useState("");
+  const [loading, setLoading] = useState(false);
   const openModal = (_id) => {
     setBookId(_id);
     setIsOpen(true);
@@ -20,12 +24,22 @@ const AllBooks = () => {
     setIsOpen(false);
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     axiosSecure.get("/featured-books").then((res) => {
       console.log("dhaka", res.data);
       setBooks(res.data);
     });
-  }, []);
+  }, []); */
+
+  const { data, refetch, isLoading } = useQuery({
+    queryKey: ["featured-books", user?.email],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure.get("/featured-books");
+      setBooks(res.data);
+      return res.data;
+    },
+  });
 
   return (
     <div>
@@ -37,7 +51,12 @@ const AllBooks = () => {
           ))}
         </div>
       </Container>
-      <RequisitionModal bookId={bookId} isOpen={isOpen} closeModal={closeModal}></RequisitionModal>
+      <RequisitionModal
+        bookId={bookId}
+        isOpen={isOpen}
+        refetch={refetch}
+        closeModal={closeModal}
+      ></RequisitionModal>
     </div>
   );
 };

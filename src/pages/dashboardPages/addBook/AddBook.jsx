@@ -66,7 +66,6 @@ const AddBook = () => {
                     setBookLoading(false);
                   } else {
                     // Book exist error message
-
                     toast.error(data.data.message);
                     setBookLoading(false);
                   }

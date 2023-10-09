@@ -169,8 +169,6 @@ const AllBooksData = () => {
           </div>
         </section>
       )}
-
-      {/* <UpdateBookModal book={singleBook}></UpdateBookModal> */}
     </>
   );
 };

@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { FaRegCircleXmark } from "react-icons/fa6";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
 
 const texasState = {
   Austin: [
@@ -36,11 +39,12 @@ const texasState = {
   ],
 };
 
-const RequisitionModal = ({ bookId, isOpen, closeModal }) => {
+const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) => {
   const { user } = useContext(AuthContext);
   const [city, setCity] = useState("");
   const [locations, setLocations] = useState([]);
   const [spot, setSpots] = useState("");
+  const [axiosSecure] = useAxiosSecure();
 
   if (!isOpen) {
     return null;
@@ -57,7 +61,7 @@ const RequisitionModal = ({ bookId, isOpen, closeModal }) => {
       setLocations(texasState.Houston);
     } else if (singleCity === "sanAntonio") {
       setLocations(texasState["San Antonio"]);
-    } else if (singleCity === "dalas") {
+    } else if (singleCity === "dallas") {
       setLocations(texasState.Dallas);
     } else {
       setLocations(["Please select city first"]);
@@ -69,18 +73,42 @@ const RequisitionModal = ({ bookId, isOpen, closeModal }) => {
     setSpots(event.target.value);
   };
 
+  // Close modal using X mark
+  const handleCloseModal = () => {
+    closeModal();
+  };
+
+  // Handle data from the modal
   const handleRequisitionData = (event) => {
     event.preventDefault();
-    console.log("raju", user.email);
-    const userEmail = user?.email;
-    const bookInfo = { userEmail, bookId, city, spot };
-    console.log("hashi", bookInfo);
-    closeModal();
+    const requisitionInfo = { userEmail: user?.email, bookId, city, spot };
+    axiosSecure.post("/requisition", requisitionInfo).then((res) => {
+      console.log(res.data);
+      if (res.data.insertedId) {
+        axiosSecure.patch(`/reader/${user?.email}`, { changeValue: 1 }).then((res) => {
+          console.log("User Requistion change", res.data);
+          if (res.data.modifiedCount) {
+            axiosSecure.patch(`/book/${bookId}`, { bookCount: -1 }).then((res) => {
+              console.log("book Count", res.data);
+              if (res.data.modifiedCount > 0) {
+                toast.success("Requisition done successfully.");
+                closeModal();
+                reloadData();
+                refetch();
+              }
+            });
+          }
+        });
+      }
+    });
   };
 
   return (
     <div className="z-10 flex justify-center items-center bg-slate-500 bg-opacity-50 fixed w-screen h-screen top-0 left-0 ">
-      <div className="bg-white w-6/12 min-w-72 h-56 p-10 rounded-md">
+      <div className="bg-white w-6/12 min-w-72 h-56 p-10 rounded-md relative">
+        <button onClick={handleCloseModal}>
+          <FaRegCircleXmark className="text-3xl bg-white rounded-full text-red-500 absolute -top-2 -right-2"></FaRegCircleXmark>
+        </button>
         <form onSubmit={handleRequisitionData} action="">
           <div className="flex justify-around">
             {/* State block */}
@@ -128,7 +156,7 @@ const RequisitionModal = ({ bookId, isOpen, closeModal }) => {
           </div>
 
           <div className="w-fit mx-auto mt-8">
-            <button className="bg-[#F55653] px-8 py-2 rounded-md" type="submit">
+            <button className="bg-[#F55653] text-white px-8 py-2 rounded-md" type="submit">
               Submit
             </button>
           </div>
