@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "../components/shared/Container";
 import Accordion from "../components/bookDetails/Accordion";
 import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import RequisitionModal from "../components/shared/RequisitionModal";
+import { AuthContext } from "../providers/AuthProvider";
 
 const BookDetails = () => {
   const [axiosSecure] = useAxiosSecure();
+  const { user, role, requisitionCount } = useContext(AuthContext);
   const bookData = useLoaderData();
   const [book, setBook] = useState(bookData);
   const [isOpen, setIsOpen] = useState(false);
   const [author, setAuthor] = useState({});
+  const [btnDisabled, setBtnDisabled] = useState(false);
+
+  useEffect(() => {
+    if (role === "standard reader" && requisitionCount === 1) {
+      setBtnDisabled(true);
+    } else if (role === "premium reader" && requisitionCount === 2) {
+      setBtnDisabled(true);
+    }
+  }, [user]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -24,7 +35,6 @@ const BookDetails = () => {
     fetch(`http://localhost:5000/book-details/${book._id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Khulna", data);
         setBook(data);
       });
   };
@@ -32,6 +42,8 @@ const BookDetails = () => {
   useEffect(() => {
     axiosSecure.get(`/authors/${book?.authorId}`).then((res) => setAuthor(res.data));
   }, []);
+
+  // role === "premium reader" && requisitionCount === 2
 
   return (
     <Container>
@@ -49,7 +61,11 @@ const BookDetails = () => {
           <p className="text-gray-400">{author.country}</p>
 
           <div className="my-5">{book && <Accordion book={book} author={author}></Accordion>}</div>
-          <button onClick={openModal} className="bg-[#F55653] px-5 py-2 text-white">
+          <button
+            disabled={btnDisabled}
+            onClick={openModal}
+            className={`bg-[#F55653] ${btnDisabled ? "bg-gray-500" : ""}  px-5 py-2 text-white`}
+          >
             Requisition
           </button>
         </div>

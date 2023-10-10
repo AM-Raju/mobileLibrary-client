@@ -9,12 +9,12 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 
 const AllBooks = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [books, setBooks] = useState([]);
   const [bookId, setBookId] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const openModal = (_id) => {
     setBookId(_id);
     setIsOpen(true);

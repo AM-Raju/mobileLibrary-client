@@ -11,7 +11,7 @@ import {
 import app from "../firebase/firebase.config";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { getUserRole } from "../api/users";
+import { getUserInfo } from "../api/users";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState(null);
+  const [requisitionCount, setRequisitionCount] = useState(0);
 
   /* Create user with email and password */
   const createUser = (email, password) => {
@@ -31,14 +32,17 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // get user role
+  // get user role and requisition count
   useEffect(() => {
     if (user) {
-      getUserRole(user?.email).then((data) => setRole(data));
+      getUserInfo(user?.email).then((data) => {
+        setRole(data?.role);
+        setRequisitionCount(data?.requisitionCount);
+      });
     }
   }, [user]);
 
-  console.log("role", role);
+  console.log("Role", role);
 
   /* Login */
   const login = (email, password) => {
@@ -85,6 +89,7 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     logout,
     role,
+    requisitionCount,
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

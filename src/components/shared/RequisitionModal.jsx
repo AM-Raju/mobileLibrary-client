@@ -44,6 +44,7 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
   const [city, setCity] = useState("");
   const [locations, setLocations] = useState([]);
   const [spot, setSpots] = useState("");
+  const [moderatorEmail, setModeratorEmail] = useState("");
   const [axiosSecure] = useAxiosSecure();
 
   if (!isOpen) {
@@ -57,12 +58,16 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
 
     if (singleCity === "austin") {
       setLocations(texasState.Austin);
+      setModeratorEmail("moderator1@gmail.com");
     } else if (singleCity === "houston") {
       setLocations(texasState.Houston);
+      setModeratorEmail("moderator2@gmail.com");
     } else if (singleCity === "sanAntonio") {
       setLocations(texasState["San Antonio"]);
+      setModeratorEmail("moderator3@gmail.com");
     } else if (singleCity === "dallas") {
       setLocations(texasState.Dallas);
+      setModeratorEmail("moderator4@gmail.com");
     } else {
       setLocations(["Please select city first"]);
     }
@@ -81,7 +86,7 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
   // Handle data from the modal
   const handleRequisitionData = (event) => {
     event.preventDefault();
-    const requisitionInfo = { userEmail: user?.email, bookId, city, spot };
+    const requisitionInfo = { userEmail: user?.email, moderatorEmail, bookId, city, spot };
     axiosSecure.post("/requisition", requisitionInfo).then((res) => {
       console.log(res.data);
       if (res.data.insertedId) {
@@ -93,7 +98,9 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
               if (res.data.modifiedCount > 0) {
                 toast.success("Requisition done successfully.");
                 closeModal();
-                reloadData();
+                if (reloadData) {
+                  reloadData();
+                }
                 refetch();
               }
             });

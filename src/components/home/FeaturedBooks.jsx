@@ -26,7 +26,7 @@ const FeaturedBooks = () => {
   };
 
   const { data, refetch, isLoading } = useQuery({
-    queryKey: ["featured-books"],
+    queryKey: ["featured-books", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get("/featured-books");
