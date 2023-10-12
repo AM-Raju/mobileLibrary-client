@@ -15,8 +15,10 @@ const Book = ({ book, openModal }) => {
       setBtnDisabled(true);
     } else if (role === "premium reader" && requisitionCount === 2) {
       setBtnDisabled(true);
+    } else {
+      setBtnDisabled(true);
     }
-  }, [user]);
+  }, [role, user]);
 
   console.log(btnDisabled);
 
@@ -32,20 +34,13 @@ const Book = ({ book, openModal }) => {
             <button
               disabled={btnDisabled}
               onClick={openModal}
-              className={`bg-[#F55653] ${
-                btnDisabled ? "bg-gray-500" : ""
+              className={`bg-[#F55653] hover:bg-[#ff2521] ${
+                btnDisabled ? "bg-gray-500 hover:bg-gray-500" : ""
               } w-32 mt-2  px-5 py-2 text-white`}
             >
               Requisition
             </button>
-            {/* <Button
-              openModal={() => {
-                openModal(_id);
-              }}
-              addedClasses={"w-32 my-3 px-5 py-2"}
-            >
-              Requisition
-            </Button> */}
+
             <p className="w-32">Available: {qty} Pcs</p>
           </div>
         </div>

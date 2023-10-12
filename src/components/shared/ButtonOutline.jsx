@@ -6,7 +6,7 @@ const ButtonOutline = ({ path, onClick, addedClass, children }) => {
     <Link to={path}>
       <button
         onClick={onClick}
-        className={`border border-[#F55653] hover:bg-[#F55653] hover:border-[#F55653] text-center text-lg font-semibold text-[#F55653] hover:text-white cursor-pointer  ${addedClass}`}
+        className={`border border-[#F55653] hover:bg-[#F55653] hover:border-[#F55653] text-center text-lg font-semibold text-[#F55653] hover:text-white cursor-pointer transition-all duration-500  ${addedClass}`}
       >
         {children}
       </button>

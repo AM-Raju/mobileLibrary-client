@@ -24,13 +24,6 @@ const AllBooks = () => {
     setIsOpen(false);
   };
 
-  /* useEffect(() => {
-    axiosSecure.get("/featured-books").then((res) => {
-      console.log("dhaka", res.data);
-      setBooks(res.data);
-    });
-  }, []); */
-
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["featured-books", user?.email],
     enabled: !loading,

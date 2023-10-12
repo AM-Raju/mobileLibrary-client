@@ -14,9 +14,9 @@ import DashboardHome from "../pages/dashboardPages/dashboardHome/DashboardHome";
 import AllUsers from "../pages/dashboardPages/allUsers/AllUsers";
 import AllBooksData from "../pages/dashboardPages/allBooks/AllBooksData";
 import AddBook from "../pages/dashboardPages/addBook/AddBook";
-import IssueBooks from "../pages/dashboardPages/issueBooks/IssueBooks";
-import MyBooks from "../pages/dashboardPages/myBooks/MyBooks";
 import AddAuthor from "../pages/dashboardPages/addAuthor/AddAuthor";
+import Requisitions from "../pages/dashboardPages/requisitions/Requisitions";
+import MyReadingList from "../pages/dashboardPages/myReadingList/MyReadingList";
 
 const router = createBrowserRouter([
   {
@@ -86,12 +86,12 @@ const router = createBrowserRouter([
         element: <AddAuthor></AddAuthor>,
       },
       {
-        path: "/dashboard/issue-books",
-        element: <IssueBooks></IssueBooks>,
+        path: "/dashboard/requisitions",
+        element: <Requisitions></Requisitions>,
       },
       {
-        path: "/dashboard/my-books",
-        element: <MyBooks></MyBooks>,
+        path: "/dashboard/my-reading-list",
+        element: <MyReadingList></MyReadingList>,
       },
     ],
   },

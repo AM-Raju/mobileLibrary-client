@@ -86,7 +86,15 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
   // Handle data from the modal
   const handleRequisitionData = (event) => {
     event.preventDefault();
-    const requisitionInfo = { userEmail: user?.email, moderatorEmail, bookId, city, spot };
+    const requisitionInfo = {
+      userEmail: user?.email,
+      moderatorEmail,
+      bookId,
+      city,
+      spot,
+      moderatorStatus: "requested",
+      readerStatus: "requested",
+    };
     axiosSecure.post("/requisition", requisitionInfo).then((res) => {
       console.log(res.data);
       if (res.data.insertedId) {

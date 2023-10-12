@@ -6,7 +6,7 @@ const Button = ({ path, children, addedClasses, openModal }) => {
     <Link to={path}>
       <button
         onClick={openModal}
-        className={` bg-[#F55653]  text-center text-lg font-semibold  text-white cursor-pointer  ${addedClasses}`}
+        className={` bg-[#F55653] hover:bg-[#ff2521]  text-center text-lg font-semibold  text-white cursor-pointer  ${addedClasses}`}
       >
         {children}
       </button>

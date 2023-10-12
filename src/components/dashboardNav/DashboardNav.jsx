@@ -40,8 +40,8 @@ const DashboardNav = () => {
           </Link>
         </li>
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/issue-books">
-            Issue Books
+          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/requisitions">
+            Requisitions
           </Link>
         </li>
       </div>
@@ -50,8 +50,11 @@ const DashboardNav = () => {
         <p className="font-semibold">User Panel</p>
         <hr />
         <li>
-          <Link className="hover:bg-cyan-500 block w-full px-3 py-2" to="/dashboard/my-books">
-            My Books
+          <Link
+            className="hover:bg-cyan-500 block w-full px-3 py-2"
+            to="/dashboard/my-reading-list"
+          >
+            My Reading List
           </Link>
         </li>
       </div>

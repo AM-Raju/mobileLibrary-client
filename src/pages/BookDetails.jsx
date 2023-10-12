@@ -13,15 +13,17 @@ const BookDetails = () => {
   const [book, setBook] = useState(bookData);
   const [isOpen, setIsOpen] = useState(false);
   const [author, setAuthor] = useState({});
-  const [btnDisabled, setBtnDisabled] = useState(false);
+  const [btnDisabled, setBtnDisabled] = useState(true);
 
   useEffect(() => {
     if (role === "standard reader" && requisitionCount === 1) {
       setBtnDisabled(true);
     } else if (role === "premium reader" && requisitionCount === 2) {
       setBtnDisabled(true);
+    } else {
+      setBtnDisabled(true);
     }
-  }, [user]);
+  }, [role, user]);
 
   const openModal = () => {
     setIsOpen(true);
