@@ -10,7 +10,7 @@ const ReaderInfo = ({ email, bookId }) => {
 
   // Get reader data from the server by email
   const { data, refetch } = useQuery({
-    queryKey: ["users", email, bookId],
+    queryKey: ["users", email, bookId, reader],
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/${email}`);

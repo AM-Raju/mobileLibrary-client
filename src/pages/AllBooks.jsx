@@ -20,6 +20,8 @@ const AllBooks = () => {
     setIsOpen(true);
   };
 
+  console.log("book", bookId);
+
   const closeModal = () => {
     setIsOpen(false);
   };

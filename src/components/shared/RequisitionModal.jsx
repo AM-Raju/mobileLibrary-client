@@ -40,7 +40,7 @@ const texasState = {
 };
 
 const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) => {
-  const { user } = useContext(AuthContext);
+  const { user, setLoading } = useContext(AuthContext);
   const [city, setCity] = useState("");
   const [locations, setLocations] = useState([]);
   const [spot, setSpots] = useState("");
@@ -86,6 +86,7 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
   // Handle data from the modal
   const handleRequisitionData = (event) => {
     event.preventDefault();
+    setLoading(true);
     const requisitionInfo = {
       userEmail: user?.email,
       moderatorEmail,
@@ -100,7 +101,7 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
       if (res.data.insertedId) {
         axiosSecure.patch(`/reader/${user?.email}`, { changeValue: 1 }).then((res) => {
           console.log("User Requistion change", res.data);
-          if (res.data.modifiedCount) {
+          if (res.data.modifiedCount > 0) {
             axiosSecure.patch(`/book/${bookId}`, { bookCount: -1 }).then((res) => {
               console.log("book Count", res.data);
               if (res.data.modifiedCount > 0) {
@@ -109,7 +110,10 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
                 if (reloadData) {
                   reloadData();
                 }
-                refetch();
+                if (refetch) {
+                  refetch();
+                }
+                setLoading(false);
               }
             });
           }

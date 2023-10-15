@@ -20,10 +20,12 @@ const BookDetails = () => {
       setBtnDisabled(true);
     } else if (role === "premium reader" && requisitionCount === 2) {
       setBtnDisabled(true);
-    } else {
+    } else if (role === "moderator") {
       setBtnDisabled(true);
+    } else {
+      setBtnDisabled(false);
     }
-  }, [role, user]);
+  }, [role, user?.email, requisitionCount]);
 
   const openModal = () => {
     setIsOpen(true);

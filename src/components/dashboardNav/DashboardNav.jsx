@@ -25,6 +25,14 @@ const DashboardNav = () => {
             All Books
           </Link>
         </li>
+        <li>
+          <Link
+            className="hover:bg-cyan-500 block w-full px-3 py-2"
+            to="/dashboard/all-requisitions"
+          >
+            All Requisitions
+          </Link>
+        </li>
       </div>
       <div>
         <p className="font-semibold">Operator Panel</p>

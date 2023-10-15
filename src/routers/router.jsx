@@ -17,6 +17,7 @@ import AddBook from "../pages/dashboardPages/addBook/AddBook";
 import AddAuthor from "../pages/dashboardPages/addAuthor/AddAuthor";
 import Requisitions from "../pages/dashboardPages/requisitions/Requisitions";
 import MyReadingList from "../pages/dashboardPages/myReadingList/MyReadingList";
+import AllRequisitions from "../pages/dashboardPages/allRequisitions/AllRequisitions";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/all-books-data",
         element: <AllBooksData></AllBooksData>,
+      },
+      {
+        path: "/dashboard/all-requisitions",
+        element: <AllRequisitions></AllRequisitions>,
       },
       {
         path: "/dashboard/add-book",

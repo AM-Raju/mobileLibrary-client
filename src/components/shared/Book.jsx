@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import book from "../../assets/books/book.jpg";
-import { Link } from "react-router-dom";
 import Button from "./Button";
 import AuthorTitleAndCountry from "./AuthorTitleAndCountry";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -15,12 +13,12 @@ const Book = ({ book, openModal }) => {
       setBtnDisabled(true);
     } else if (role === "premium reader" && requisitionCount === 2) {
       setBtnDisabled(true);
-    } else {
+    } else if (role === "moderator") {
       setBtnDisabled(true);
+    } else {
+      setBtnDisabled(false);
     }
-  }, [role, user]);
-
-  console.log(btnDisabled);
+  }, [role, user?.email, requisitionCount]);
 
   return (
     <div className="">
@@ -33,7 +31,7 @@ const Book = ({ book, openModal }) => {
             </Button>
             <button
               disabled={btnDisabled}
-              onClick={openModal}
+              onClick={() => openModal(_id)}
               className={`bg-[#F55653] hover:bg-[#ff2521] ${
                 btnDisabled ? "bg-gray-500 hover:bg-gray-500" : ""
               } w-32 mt-2  px-5 py-2 text-white`}

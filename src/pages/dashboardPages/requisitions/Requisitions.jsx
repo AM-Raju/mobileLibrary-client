@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import ModeratorInfo from "../../../components/requisitions/ModeratorInfo";
@@ -14,7 +14,7 @@ const Requisitions = () => {
 
   // Get requisition data from the server
   const { data, refetch } = useQuery({
-    queryKey: ["requisitions"],
+    queryKey: ["requisitions", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/requisitions`);
@@ -33,12 +33,20 @@ const Requisitions = () => {
     });
   };
 
-  const handleReturn = (id) => {
-    axiosSecure.patch(`/returned/${id}`).then((res) => {
-      console.log("return", res.data);
+  const handleReceive = (requisitionId, readerEmail, bookId) => {
+    axiosSecure.patch(`/reader/${readerEmail}`, { changeValue: -1 }).then((res) => {
       if (res.data.modifiedCount > 0) {
-        toast.success("Book received successfully");
-        refetch();
+        axiosSecure.patch(`/book/${bookId}`, { bookCount: 1 }).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            axiosSecure.patch(`/returned/${requisitionId}`).then((res) => {
+              console.log("return", res.data);
+              if (res.data.modifiedCount > 0) {
+                toast.success("Book received successfully");
+                refetch();
+              }
+            });
+          }
+        });
       }
     });
   };
@@ -68,7 +76,10 @@ const Requisitions = () => {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
-                    <ModeratorInfo email={requisition?.moderatorEmail}></ModeratorInfo>
+                    <ModeratorInfo
+                      email={requisition?.moderatorEmail}
+                      index={index}
+                    ></ModeratorInfo>
                   </td>
 
                   <td>
@@ -86,16 +97,37 @@ const Requisitions = () => {
                   </td>
                   <td className="w-40">{requisition?.city}</td>
                   <td>{requisition?.spot}</td>
-                  <td>{requisition?.moderatorStatus}</td>
-                  <td>{requisition?.readerStatus}</td>
-
+                  <td
+                    className={`${
+                      requisition?.moderatorStatus === "received" ? "text-green-600" : "text-black"
+                    }
+                    ${
+                      requisition?.moderatorStatus === "delivered" ? "text-red-500" : "text-black"
+                    }`}
+                  >
+                    {requisition?.moderatorStatus}
+                  </td>
+                  <td
+                    className={`${
+                      requisition?.readerStatus === "received" ? "text-red-500" : "text-black"
+                    } 
+                    ${requisition?.readerStatus === "returned" ? "text-green-600" : "text-black"}`}
+                  >
+                    {requisition?.readerStatus}
+                  </td>
+                  {/* Action buttons */}
                   <td>
                     {requisition?.moderatorStatus === "requested" && (
                       <button
+                        disabled={requisition?.moderatorEmail !== user?.email}
                         onClick={() => {
                           handleDeliver(requisition?._id);
                         }}
-                        className="bg-[#F55653] hover:bg-[#ff2521]  px-4 py-2 rounded text-white"
+                        className={`bg-[#F55653] ${
+                          requisition?.moderatorEmail !== user?.email
+                            ? "bg-gray-500 hover:bg-gray-500"
+                            : ""
+                        } hover:bg-[#ff2521]  px-4 py-2 rounded text-white`}
                       >
                         Deliver
                       </button>
@@ -103,10 +135,19 @@ const Requisitions = () => {
 
                     {requisition?.moderatorStatus === "delivered" && (
                       <button
+                        disabled={requisition?.moderatorEmail !== user?.email}
                         onClick={() => {
-                          handleReturn(requisition?._id);
+                          handleReceive(
+                            requisition?._id,
+                            requisition?.userEmail,
+                            requisition?.bookId
+                          );
                         }}
-                        className="bg-[#F55653] hover:bg-[#ff2521]  px-4 py-2 rounded text-white"
+                        className={`bg-green-600  ${
+                          requisition?.moderatorEmail !== user?.email
+                            ? "bg-gray-500 hover:bg-gray-500"
+                            : ""
+                        } hover:bg-green-700  px-4 py-2 rounded text-white`}
                       >
                         Receive
                       </button>

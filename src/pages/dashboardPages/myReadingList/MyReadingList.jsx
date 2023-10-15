@@ -24,7 +24,7 @@ const MyReadingList = () => {
 
   return (
     <section className="py-10 h-full bg-slate-300">
-      <h2 className="text-5xl text-center font-semibold mb-10">Requisitions</h2>
+      <h2 className="text-5xl text-center font-semibold mb-10">My Reading List</h2>
       <div className="w-10/12 mx-auto overflow-x-auto">
         <table className="table h-fit">
           {/* head */}
@@ -46,7 +46,10 @@ const MyReadingList = () => {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
-                    <ModeratorInfo email={requisition?.moderatorEmail}></ModeratorInfo>
+                    <ModeratorInfo
+                      email={requisition?.moderatorEmail}
+                      index={index}
+                    ></ModeratorInfo>
                   </td>
 
                   <td>
@@ -64,8 +67,24 @@ const MyReadingList = () => {
                   </td>
                   <td className="w-40 ">{requisition?.city}</td>
                   <td>{requisition?.spot}</td>
-                  <td>{requisition?.moderatorStatus}</td>
-                  <td>{requisition?.readerStatus}</td>
+                  <td
+                    className={`${
+                      requisition?.moderatorStatus === "received" ? "text-green-600" : "text-black"
+                    }
+                    ${
+                      requisition?.moderatorStatus === "delivered" ? "text-red-500" : "text-black"
+                    }`}
+                  >
+                    {requisition?.moderatorStatus}
+                  </td>
+                  <td
+                    className={`${
+                      requisition?.readerStatus === "received" ? "text-red-500" : "text-black"
+                    } 
+                    ${requisition?.readerStatus === "returned" ? "text-green-600" : "text-black"}`}
+                  >
+                    {requisition?.readerStatus}
+                  </td>
                 </tr>
               ))}
           </tbody>

@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
         setRequisitionCount(data?.requisitionCount);
       });
     }
-  }, [user]);
+  }, [user, loading]);
 
   console.log("Role", role);
 
