@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const SocialIcon = () => {
   return (
-    <div className="flex gap-5 text-2xl text-white">
+    <div className={`flex gap-5 text-2xl text-white `}>
       <Link className="hover:text-[#375B9A] ease-in duration-300" to="#">
         <FaFacebookF></FaFacebookF>
       </Link>

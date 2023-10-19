@@ -15,6 +15,8 @@ const Book = ({ book, openModal }) => {
       setBtnDisabled(true);
     } else if (role === "moderator") {
       setBtnDisabled(true);
+    } else if (role === "admin") {
+      setBtnDisabled(true);
     } else {
       setBtnDisabled(false);
     }

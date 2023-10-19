@@ -1,16 +1,15 @@
 import React, { useContext, useState } from "react";
-import { FaBars, FaRegCircleUser, FaX } from "react-icons/fa6";
+import { FaBars, FaRegCircleUser, FaRegUser, FaX } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Container from "./Container";
 import Logo from "./Logo";
 import ButtonOutline from "./ButtonOutline";
 import { AuthContext } from "../../providers/AuthProvider";
 
-import userImage from "../../assets/author/author.jpg";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, updatedUser } = useContext(AuthContext);
 
   /* States */
   const [open, setOpen] = useState(false);
@@ -96,14 +95,23 @@ const Navbar = () => {
             </nav>
             {/* User or Button or Search bar part */}
             <div className="flex items-center">
-              <div>{user?.email}</div>
+              {/* User name/email and role */}
+              {user && (
+                <div className="mr-1">
+                  <p className="font-semibold">
+                    {updatedUser?.name ? updatedUser?.name : user?.email}
+                  </p>
+                  <p className="text-sm text-red-500">{updatedUser?.role}</p>
+                </div>
+              )}
               <div className="dropdown dropdown-end">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-9 rounded-full">
+                {/* user pic */}
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar ">
+                  <div className="w-10 rounded-full  border-2 border-red-500 ">
                     {user ? (
-                      <img src={user?.photoURL} />
+                      <img src={updatedUser?.profilePic} />
                     ) : (
-                      <FaRegCircleUser className="text-4xl text-red-500"></FaRegCircleUser>
+                      <FaRegUser className="text-2xl my-auto mx-auto mt-1 text-red-500"></FaRegUser>
                     )}
                   </div>
                 </label>
@@ -114,6 +122,11 @@ const Navbar = () => {
                   {user ? (
                     <>
                       <li>
+                        <ButtonOutline path={"/dashboard/profile"} addedClass={"w-full py-1"}>
+                          Profile
+                        </ButtonOutline>
+                      </li>
+                      <li className="mt-2">
                         <ButtonOutline path={"/dashboard/"} addedClass={"w-full py-1"}>
                           Dashboard
                         </ButtonOutline>

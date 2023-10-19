@@ -9,9 +9,14 @@ const DashboardNav = () => {
         <Logo></Logo>
       </Link>
       {/* Sidebar content here */}
-      <li>
+
+      <li className="py-2 ">
+        <Link to="/">Home</Link>
+      </li>
+      <li className=" py-2 ">
         <Link to="/dashboard/">Dashboard</Link>
       </li>
+
       <div className="">
         <p className="font-semibold">Admin Panel</p>
         <hr />

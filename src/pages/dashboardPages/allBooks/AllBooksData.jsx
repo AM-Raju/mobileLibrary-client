@@ -3,7 +3,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import AuthorTitleAndCountry from "../../../components/shared/AuthorTitleAndCountry";
 import { toast } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
-import UpdateBookModal from "../../../components/shared/UpdateBookModal";
 
 const AllBooksData = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -35,13 +34,13 @@ const AllBooksData = () => {
     },
   });
 
-  /*   useEffect(() => {
+  useEffect(() => {
     setLoading(true);
     axiosSecure.get(`/books?search=${searchText}`).then((res) => {
       setBooks(res.data);
       setLoading(false);
     });
-  }, [searchText]); */
+  }, [searchText]);
 
   // Decrease page num by 1
   const decreasePageNum = () => {
@@ -101,8 +100,7 @@ const AllBooksData = () => {
                     <th>Author</th>
                     <th>Format</th>
                     <th>Quantity</th>
-                    <th>Stats</th>
-                    <th>Update</th>
+
                     <th>Delete</th>
                   </tr>
                 </thead>
@@ -125,21 +123,7 @@ const AllBooksData = () => {
                       <td>
                         <p>{book.qty}</p>
                       </td>
-                      <td>
-                        <button className="bg-[#F55653] px-4 py-2 rounded font-semibold  tracking-wider">
-                          Stats
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          onClick={() => {
-                            openUpdateBookModal(book);
-                          }}
-                          className="bg-cyan-500 px-4 py-2 rounded font-semibold  tracking-wider"
-                        >
-                          Update
-                        </button>
-                      </td>
+
                       <td>
                         <button
                           onClick={() => {

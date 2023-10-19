@@ -18,6 +18,7 @@ import AddAuthor from "../pages/dashboardPages/addAuthor/AddAuthor";
 import Requisitions from "../pages/dashboardPages/requisitions/Requisitions";
 import MyReadingList from "../pages/dashboardPages/myReadingList/MyReadingList";
 import AllRequisitions from "../pages/dashboardPages/allRequisitions/AllRequisitions";
+import Profile from "../pages/dashboardPages/profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/",
         element: <DashboardHome></DashboardHome>,
+      },
+      {
+        path: "/dashboard/profile",
+        element: <Profile></Profile>,
       },
       {
         path: "/dashboard/all-users",

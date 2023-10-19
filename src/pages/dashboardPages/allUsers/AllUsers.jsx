@@ -20,7 +20,7 @@ const AllUsers = () => {
 
   const makeModerator = (email) => {
     console.log("reader email", email);
-    axiosSecure.patch(`/user/${email}`).then((res) => {
+    axiosSecure.patch(`/user/${email}`, { role: "moderator" }).then((res) => {
       console.log("Make moderaotr", res.data);
       if (res.data.modifiedCount > 0) {
         toast.success("Updated to moderator");

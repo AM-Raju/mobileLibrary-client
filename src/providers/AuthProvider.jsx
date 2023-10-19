@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState(null);
+  const [updatedUser, setUpdatedUser] = useState(null);
   const [requisitionCount, setRequisitionCount] = useState(0);
 
   /* Create user with email and password */
@@ -38,6 +39,7 @@ const AuthProvider = ({ children }) => {
       getUserInfo(user?.email).then((data) => {
         setRole(data?.role);
         setRequisitionCount(data?.requisitionCount);
+        setUpdatedUser(data);
       });
     }
   }, [user, loading]);
@@ -90,6 +92,7 @@ const AuthProvider = ({ children }) => {
     logout,
     role,
     requisitionCount,
+    updatedUser,
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
