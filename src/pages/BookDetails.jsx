@@ -53,14 +53,14 @@ const BookDetails = () => {
 
   return (
     <Container>
-      <div className="my-5 lg:flex mx-auto  lg:w-10/12">
+      <div className="my-5 2xl:flex mx-auto  lg:w-10/12">
         <div className="relative w-fit mx-auto">
           <img className="w-96" src={book?.cover} alt="" />
           <p className="absolute top-3 right-3 bg-white text-red-500 font-semibold px-3 py-1 shadow-md">
             Available Copy: {book?.qty}
           </p>
         </div>
-        <div className="mx-5 lg:mx-0 lg:ml-20 mt-5 md:mt-0 flex-grow  lg:w-4/5">
+        <div className="mx-5 lg:mx-0 lg:ml-20 mt-5 sm:mt-10 2xl:mt-0 flex-grow  lg:w-4/5">
           <h1 className="text-3xl md:text-5xl font-semibold ">{book?.title}</h1>
 
           <p className="text-2xl font-semibold text-gray-400 mt-5 ">{author.name}</p>
