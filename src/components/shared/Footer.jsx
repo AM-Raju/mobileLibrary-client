@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <div className="bg-[#339DB3] h-fit">
+    <div className="bg-[#339DB3] h-fit hidden">
       <Container>
         <div className="flex flex-col items-center pt-10">
           <Logo></Logo>

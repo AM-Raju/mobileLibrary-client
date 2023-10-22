@@ -8,7 +8,9 @@ const Banner = ({ banner, children }) => {
         className="h-[400px] flex justify-center items-center"
         style={{ backgroundImage: `url(${banner})` }}
       >
-        <h1 className="text-7xl text-white font-semibold tracking-widest">{children}</h1>
+        <h1 className="text-6xl sm:text-7xl text-center text-white font-semibold tracking-widest">
+          {children}
+        </h1>
       </div>
     </Container>
   );

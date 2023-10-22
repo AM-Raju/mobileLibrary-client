@@ -5,6 +5,8 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { FaRegEdit, FaUser } from "react-icons/fa";
 import ProfileModal from "../../../components/profile/ProfileModal";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -26,6 +28,10 @@ const Profile = () => {
   };
   return (
     <section className="py-10 h-full bg-slate-300">
+      <Helmet>
+        <title>Profile | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <h2 className="text-5xl text-center font-semibold ">Profile</h2>
       <div className=" relative max-w-7xl mx-auto px-10 py-20 bg-orange-500 mt-10 grid grid-cols-3">
         {/* Image block */}

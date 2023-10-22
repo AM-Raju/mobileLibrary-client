@@ -2,7 +2,7 @@ import React from "react";
 
 const Newsletter = () => {
   return (
-    <div className="relative group h-60 w-full bg-gray-200 flex items-center justify-center">
+    <div className="relative group h-60 w-full bg-gray-200 flex items-center justify-center ">
       <h1 className="text-[180px] uppercase text-[#339DB3] font-extrabold leading-tight">
         Newsletter
       </h1>

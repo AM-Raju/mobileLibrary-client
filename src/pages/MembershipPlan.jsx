@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Banner from "../components/shared/Banner";
 import membershipBanner from "../assets/banner/membershipBanner.jpg";
 import Container from "../components/shared/Container";
-
 import Plan from "./Plan";
 import Modal from "../components/shared/Modal";
+import { Helmet } from "react-helmet-async";
+import favicon from "../assets/icons/favicon.png";
 
 const MembershipPlan = () => {
   const features = {
@@ -27,6 +28,10 @@ const MembershipPlan = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Pricing | MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <Banner banner={membershipBanner}>Membership Plan</Banner>
       <Container>
         <div className="cyan flex justify-around w-5/6 mx-auto my-10">

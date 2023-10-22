@@ -24,7 +24,7 @@ const Book = ({ book, openModal }) => {
 
   return (
     <div className="">
-      <div className="w-fit p-8 border box-border hover:border-gray-700 transition-all duration-300 h-96">
+      <div className="w-fit p-6 xl:max-2xl:p-2 border box-border hover:border-gray-700 transition-all duration-300 h-96 xl:max-2xl:h-80">
         <div className="flex">
           <img className="w-36" src={cover} alt="" />
           <div className="pl-6">

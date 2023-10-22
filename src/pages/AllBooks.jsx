@@ -7,6 +7,8 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import RequisitionModal from "../components/shared/RequisitionModal";
 import { AuthContext } from "../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
+import favicon from "../assets/icons/favicon.png";
 
 const AllBooks = () => {
   const { user, loading } = useContext(AuthContext);
@@ -38,9 +40,13 @@ const AllBooks = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Books | MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <Banner banner={bannerImg}>All Books</Banner>
       <Container>
-        <div className="my-5 grid grid-cols-4 gap-7">
+        <div className="my-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-7 w-fit mx-auto">
           {books.map((book, index) => (
             <Book key={index} book={book} openModal={openModal}></Book>
           ))}

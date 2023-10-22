@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
 import RequisitionRowAd from "../../../components/allRequisitionsC/RequisitionRowAd";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const AllRequisitions = () => {
   const { user, loading, role } = useContext(AuthContext);
@@ -23,6 +24,10 @@ const AllRequisitions = () => {
 
   return (
     <section className="py-10 h-full bg-slate-300">
+      <Helmet>
+        <title>Requisitions | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <h2 className="text-5xl text-center font-semibold mb-10">All Requisitions</h2>
       <div className="w-10/12 mx-auto overflow-x-auto">
         <table className="table h-fit">

@@ -36,11 +36,11 @@ const FeaturedBooks = () => {
   });
 
   return (
-    <div className=" pb-20">
+    <div className=" pb-20 ">
       <Container>
         <div>
           <SectionTitle headingOne="Featured" headingTwo="Books"></SectionTitle>
-          <div className="flex justify-between">
+          <div className="md:flex flex-wrap justify-between md:max-xl:justify-evenly  w-fit mx-auto">
             {books.slice(0, 4).map((book, index) => (
               <Book key={index} book={book} openModal={openModal}></Book>
             ))}

@@ -6,6 +6,8 @@ import ModeratorInfo from "../../../components/requisitions/ModeratorInfo";
 import ReaderInfo from "../../../components/requisitions/ReaderInfo";
 import BookInfo from "../../../components/requisitions/BookInfo";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const Requisitions = () => {
   const { user, loading } = useContext(AuthContext);
@@ -53,6 +55,10 @@ const Requisitions = () => {
 
   return (
     <section className="py-10 h-full bg-slate-300">
+      <Helmet>
+        <title>Requisitions | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <h2 className="text-5xl text-center font-semibold mb-10">Requisitions</h2>
       <div className="w-10/12 mx-auto overflow-x-auto">
         <table className="table h-fit">

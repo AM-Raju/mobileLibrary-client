@@ -17,18 +17,21 @@ const PopularAuthor = () => {
   }, []);
   return (
     <Container>
-      <div className=" relative border hover:border-[#F55653] ease-in duration-1000 mb-20 name">
+      <div className=" relative border hover:border-[#F55653] ease-in duration-1000 mb-20 name ">
         <p className="py-5 bg-[#F55653] w-fit px-10 my-5 text-white text-2xl">
           Popular Authors Around the World
         </p>
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-6 xl:max-2xl:gap-x-20 w-fit mx-auto">
           {/* Author */}
           {authors.slice(0, 5).map((author, index) => (
             <Author key={index} author={author}></Author>
           ))}
         </div>
 
-        <Button path={"/all-authors"} addedClasses={"absolute top-0 right-0 w-fit py-5 px-10 my-5"}>
+        <Button
+          path={"/all-authors"}
+          addedClasses={"xl:absolute top-0 right-0 w-fit mx-auto py-5 px-10 my-5"}
+        >
           See All
         </Button>
       </div>

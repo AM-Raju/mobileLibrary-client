@@ -13,7 +13,7 @@ const AuthorTitleAndCountry = ({ authorId }) => {
   return (
     <>
       <p>{author.name}</p>
-      <p className="text-gray-500 text-xs">{author.country}</p>
+      <p className="text-gray-500 text-sm md:text-xs">{author.country}</p>
     </>
   );
 };

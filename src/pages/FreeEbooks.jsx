@@ -4,6 +4,8 @@ import bannerImg from "../assets/banner/FreeEbooksBanner.jpg";
 import Container from "../components/shared/Container";
 import Ebook from "../components/shared/Ebook";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
+import favicon from "../assets/icons/favicon.png";
 
 const FreeEbooks = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -11,12 +13,16 @@ const FreeEbooks = () => {
   const [ebooks, setEbooks] = useState([]);
   useEffect(() => {
     axiosSecure.get("/ebooks").then((res) => {
-      console.log(res.data);
+      console.log("Ebook", res.data);
       setEbooks(res.data);
     });
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Free Ebooks | MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <Banner banner={bannerImg}>Free Ebooks</Banner>
       <Container>
         <div className="my-5 flex flex-wrap gap-y-3">

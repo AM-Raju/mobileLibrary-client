@@ -53,13 +53,13 @@ const Navbar = () => {
     <div className="py-2 border border-gray-200 border-x-0 mt-10">
       <Container>
         {/* Navbar Part */}
-        <div className="bg-white md:bg-transparent pl-5 md:pl-0 md:flex items-center justify-between  ">
+        <div className="bg-white md:bg-transparent pl-5  lg:flex items-center justify-between  ">
           {/* Logo and Toggle button part */}
           <div className="flex justify-between items-center">
             {/* Logo Part */}
             <Logo></Logo>
             {/* Toggle icon for responsive */}
-            <div className="md:hidden mr-5">
+            <div className="lg:hidden mr-5">
               {open ? (
                 <FaX
                   onClick={() => {
@@ -79,8 +79,8 @@ const Navbar = () => {
           </div>
           {/* Navbar and button part */}
           <div
-            className={`w-2/3 md:flex justify-between items-center transition-all duration-300  ${
-              !open ? "absolute opacity-0 md:relative md:opacity-100 " : " opacity-100"
+            className={`w-2/3 lg:max-xl:w-4/5  md:flex justify-between items-center transition-all duration-300 mr-5 3xl:mr-0  ${
+              !open ? "absolute opacity-0 lg:relative lg:opacity-100 " : " opacity-100"
             }`}
           >
             {/* Nav part */}
@@ -154,21 +154,6 @@ const Navbar = () => {
                 </ul>
               </div>
             </div>
-            {/*             <div>
-              <ButtonOutline path={"/login"} addedClass={"px-7 py-2 "}>
-                Login
-              </ButtonOutline>
-            </div>
-            <div>
-              <ButtonOutline path={"/signup"} addedClass={"px-7 py-2 "}>
-                Sign Up
-              </ButtonOutline>
-            </div>
-            <div>
-              <ButtonOutline path={"/"} addedClass={"px-7 py-2 "}>
-                Dashboard
-              </ButtonOutline>
-            </div> */}
           </div>
         </div>
       </Container>

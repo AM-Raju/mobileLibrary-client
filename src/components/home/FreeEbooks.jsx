@@ -20,7 +20,7 @@ const FreeEbooks = () => {
     <Container>
       <div className="mb-20 ">
         <SectionTitle headingOne="Free" headingTwo="Ebooks"></SectionTitle>
-        <div className="flex justify-between">
+        <div className="flex flex-wrap justify-between xl:justify-evenly">
           {ebooks.slice(0, 6).map((ebook, index) => (
             <Ebook key={index} ebook={ebook}></Ebook>
           ))}

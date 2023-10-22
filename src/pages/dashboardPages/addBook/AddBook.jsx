@@ -4,6 +4,8 @@ import { imageUpload } from "../../../api/utils";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const AddBook = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -89,6 +91,10 @@ const AddBook = () => {
   };
   return (
     <section className="py-10 h-full bg-slate-300">
+      <Helmet>
+        <title>Add Book | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <h2 className="text-5xl text-center font-semibold ">Add Book</h2>
       <div className=" max-w-7xl mx-auto p-10 bg-orange-500 mt-10">
         {/* Add book form */}

@@ -4,6 +4,9 @@ import Banner from "../components/shared/Banner";
 import authorBanner from "../assets/banner/All-Authors-Banner.jpg";
 import Container from "../components/shared/Container";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
+import favicon from "../assets/icons/favicon.png";
+
 const AllAuthors = () => {
   const [axiosSecure] = useAxiosSecure();
   const [authors, setAuthors] = useState([]);
@@ -19,6 +22,10 @@ const AllAuthors = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Authors | MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       {!loading && (
         <div>
           <Banner banner={authorBanner}></Banner>

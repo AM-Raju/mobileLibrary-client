@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import ModeratorInfo from "../../../components/requisitions/ModeratorInfo";
 import ReaderInfo from "../../../components/requisitions/ReaderInfo";
 import BookInfo from "../../../components/requisitions/BookInfo";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const MyReadingList = () => {
   const { user, loading } = useContext(AuthContext);
@@ -24,6 +26,10 @@ const MyReadingList = () => {
 
   return (
     <section className="py-10 h-full bg-slate-300">
+      <Helmet>
+        <title>My Reading List | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <h2 className="text-5xl text-center font-semibold mb-10">My Reading List</h2>
       <div className="w-10/12 mx-auto overflow-x-auto">
         <table className="table h-fit">

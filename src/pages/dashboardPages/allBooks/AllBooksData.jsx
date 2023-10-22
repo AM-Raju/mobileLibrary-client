@@ -3,6 +3,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import AuthorTitleAndCountry from "../../../components/shared/AuthorTitleAndCountry";
 import { toast } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const AllBooksData = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -75,6 +77,10 @@ const AllBooksData = () => {
 
   return (
     <>
+      <Helmet>
+        <title>All Books | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       {!isLoading && (
         <section className="py-10 h-full bg-slate-300">
           <h2 className="text-5xl text-center font-semibold mb-10">All Books</h2>

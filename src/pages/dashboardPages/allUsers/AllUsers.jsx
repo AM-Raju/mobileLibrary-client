@@ -4,6 +4,8 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { FaTrash } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+import favicon from "../../../assets/icons/favicon.png";
 
 const AllUsers = () => {
   const { user, loading, role } = useContext(AuthContext);
@@ -41,6 +43,10 @@ const AllUsers = () => {
 
   return (
     <section className="py-10 h-full bg-slate-300">
+      <Helmet>
+        <title>Users | Dashboard-MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <h2 className="text-5xl text-center font-semibold mb-10">All Users</h2>
       <div className="w-8/12 mx-auto overflow-x-auto">
         <table className="table h-fit">

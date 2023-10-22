@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useRouteError } from "react-router-dom";
 import errorBg from "../assets/errorBg.webp";
+import { Helmet } from "react-helmet-async";
+import favicon from "../assets/icons/favicon.png";
 
 const ErrorPage = () => {
   const { error, status } = useRouteError();
@@ -9,6 +11,10 @@ const ErrorPage = () => {
       style={{ backgroundImage: `url(${errorBg})` }}
       className="relative h-screen w-screen p-16 flex justify-center items-center bg-gray-100 text-gray-900"
     >
+      <Helmet>
+        <title>404 | MobileLibrary</title>
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+      </Helmet>
       <div className=" absolute top-52 2xl:left-2/3 2xl:mr-10">
         <div className="max-w-xl text-center">
           <h2 className="mb-8 font-extrabold text-9xl text-red-500">
