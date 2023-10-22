@@ -16,16 +16,13 @@ const Home = () => {
         <title>Home | MobileLibrary</title>
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
-      <div className="hidden">
-        <Slider></Slider>
-        <FreeEbooks></FreeEbooks>
-        <Membership></Membership>
-        <FeaturedBooks></FeaturedBooks>
-      </div>
+
+      <Slider></Slider>
+      <FreeEbooks></FreeEbooks>
+      <Membership></Membership>
+      <FeaturedBooks></FeaturedBooks>
       <PopularAuthor></PopularAuthor>
-      <div className="hidden">
-        <Testimonials></Testimonials>
-      </div>
+      <Newsletter></Newsletter>
     </div>
   );
 };
