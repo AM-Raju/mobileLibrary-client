@@ -5,10 +5,10 @@ const Banner = ({ banner, children }) => {
   return (
     <Container>
       <div
-        className="h-[400px] flex justify-center items-center"
+        className="h-[400px]  flex justify-center items-center"
         style={{ backgroundImage: `url(${banner})` }}
       >
-        <h1 className="text-6xl sm:text-7xl text-center text-white font-semibold tracking-widest">
+        <h1 className="text-5xl sm:text-7xl text-center text-white font-semibold tracking-widest">
           {children}
         </h1>
       </div>

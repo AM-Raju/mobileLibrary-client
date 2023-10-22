@@ -34,7 +34,7 @@ const MembershipPlan = () => {
       </Helmet>
       <Banner banner={membershipBanner}>Membership Plan</Banner>
       <Container>
-        <div className="cyan flex justify-around w-5/6 mx-auto my-10">
+        <div className="cyan flex flex-col md:flex-row justify-around md:max-xl:gap-3 gap-y-5 w-5/6 mx-auto my-10">
           <Plan
             basicFeatures={features.Basic}
             title={"Basic"}

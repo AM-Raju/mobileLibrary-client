@@ -12,8 +12,10 @@ const Plan = ({ title, pricing, basicFeatures, color, showMyModal }) => {
   };
 
   return (
-    <div className={`relative border border-${color} w-80 h-[420px]`}>
-      <div className={`bg-${color} text-center py-10 text-white`}>
+    <div
+      className={`lg:block relative border border-gray-300 w-72  md:max-lg:w-60 lg:w-80 mx-auto h-[420px]`}
+    >
+      <div className={`bg-${color} text-center py-10 text-white md:max-lg:w-60 w-72 lg:w-80`}>
         <h1 className="text-5xl font-semibold">{title}</h1>
         <p className="text-xl">{pricing === "Free" ? pricing : `$${pricing}/Year`}</p>
       </div>
