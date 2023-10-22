@@ -27,10 +27,15 @@ const AllAuthors = () => {
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
       {!loading && (
-        <div>
-          <Banner banner={authorBanner}></Banner>
+        <div className="lg:mx-5">
+          <div className="bg-red-500 h-48 flex items-center justify-center 2xl:hidden">
+            <h1 className="text-6xl font-semibold text-white text-center">Authors</h1>
+          </div>
+          <div className="hidden 2xl:block">
+            <Banner banner={authorBanner}></Banner>
+          </div>
           <Container>
-            <div className="grid grid-cols-9 gap-[30px] my-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-9 gap-[30px] my-5 mx-auto w-fit">
               {authors.map((author, index) => (
                 <SingleAuthorCard key={index} author={author}></SingleAuthorCard>
               ))}
