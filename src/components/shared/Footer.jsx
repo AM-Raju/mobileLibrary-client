@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <div className="bg-[#339DB3] h-fit hidden">
+    <div className="bg-[#339DB3] h-fit">
       <Container>
         <div className="flex flex-col items-center pt-10">
           <Logo></Logo>
@@ -26,7 +26,7 @@ const Footer = () => {
           <SocialIcon></SocialIcon>
         </div>
         {/* Additional Pages */}
-        <div className="flex flex-wrap justify-center gap-2 lg:gap-5 text-white py-3 lg:mt-0">
+        <div className="flex flex-wrap justify-center gap-5 text-white py-3 lg:mt-0">
           <Link to="#">Home </Link>
           <Link to="#">Privacy Policy </Link>
           <Link to="#">Term and Conditions </Link>
