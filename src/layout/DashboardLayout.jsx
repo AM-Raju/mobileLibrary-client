@@ -8,7 +8,11 @@ const DashboardLayout = () => {
     <div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-side z-50">
+          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <DashboardNav></DashboardNav>
+        </div>
+        <div className="drawer-content z-10">
           <label
             htmlFor="my-drawer-2"
             className="lg:hidden cursor-pointer absolute top-4 left-4 text-white shadow-sm"
@@ -17,10 +21,6 @@ const DashboardLayout = () => {
           </label>
           {/* Page content here */}
           <Outlet></Outlet>
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <DashboardNav></DashboardNav>
         </div>
       </div>
     </div>

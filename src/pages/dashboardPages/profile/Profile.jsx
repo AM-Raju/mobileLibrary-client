@@ -84,6 +84,7 @@ const Profile = () => {
           <FaRegEdit className="text-3xl text-white opacity-50 hover:opacity-100"></FaRegEdit>
         </button>
       </div>
+
       <ProfileModal isOpen={isOpen} reader={reader} modalClose={modalClose}></ProfileModal>
     </section>
   );

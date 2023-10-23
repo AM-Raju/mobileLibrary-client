@@ -4,7 +4,7 @@ import Logo from "../shared/Logo";
 
 const DashboardNav = () => {
   return (
-    <ul className=" p-4 w-80 min-h-full bg-[#339DB3] text-base-content ">
+    <ul className=" p-4 lg:w-64 2xl:w-72 3xl:w-80 min-h-full bg-[#339DB3] text-base-content ">
       <Link to="/">
         <Logo></Logo>
       </Link>

@@ -108,14 +108,14 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
   }
 
   return (
-    <div className="bg-slate-500 bg-opacity-50 fixed w-10/12 z-50 h-screen top-0 right-0 flex justify-center items-center">
-      <div className="w-10/12 px-16 py-8 bg-orange-500 relative">
+    <div className="bg-slate-500 bg-opacity-50 relative lg:fixed -top-72 lg:top-0  right-0 w-full lg:w-9/12 xl:w-10/12  z-50 lg:h-screen  flex justify-center items-center ">
+      <div className=" w-full lg:w-10/12 px-10 sm:px-16 py-8 bg-orange-500 absolute lg:relative">
         <h2 className="text-3xl font-semibold text-center mb-8">Edit Profile</h2>
         <form className="" onSubmit={handleSubmit(updateProfile)}>
           {/* Block One */}
-          <div className="w-full flex gap-5">
+          <div className="w-full flex flex-col lg:flex-row gap-5">
             {/* book name */}
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label htmlFor="">Name</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -126,7 +126,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
               />
             </div>
             {/* Email */}
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label htmlFor="">Email</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -138,9 +138,9 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
             </div>
           </div>
           {/* Block Two */}
-          <div className="w-full flex gap-5 my-5">
+          <div className="w-full flex flex-col lg:flex-row gap-5 my-5">
             {/* Profession */}
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <label htmlFor="">Profession</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -151,7 +151,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
               />
             </div>
             {/* user role */}
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <label htmlFor="">User Role</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -163,7 +163,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
               />
             </div>
             {/* Phone no. */}
-            <div className="w-2/6">
+            <div className="w-full lg:w-1/3">
               <label htmlFor="">Phone Number</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -176,9 +176,9 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
           </div>
 
           {/* Block Three */}
-          <div className="flex gap-5 my-5">
+          <div className="w-full flex flex-col lg:flex-row gap-5 my-5">
             {/* Age */}
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <label htmlFor="">Age</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -189,7 +189,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
               />
             </div>
             {/* Sex */}
-            <div className="w-1/3">
+            <div className="w-full lg:w-1/3">
               <label htmlFor="">Gender</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -201,7 +201,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
             </div>
             {/* upload profile image */}
             {reader?.profilePic ? (
-              <div className="w-1/3">
+              <div className="w-full lg:w-1/3">
                 <label
                   className=" w-full text-center bg-gray-500 text-white cursor-pointer font-semibold block px-7 py-2 mt-7"
                   htmlFor="file"
@@ -223,8 +223,8 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
             )}
           </div>
           {/* Block four */}
-          <div className="flex mt-5 gap-5">
-            <div className="w-1/4">
+          <div className="w-full flex flex-col lg:flex-row gap-5 mt-5">
+            <div className="w-full lg:w-1/4">
               <label htmlFor="">Facebook</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -234,7 +234,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
                 placeholder="Facebook"
               />
             </div>
-            <div className="w-1/4">
+            <div className="w-full lg:w-1/4">
               <label htmlFor="">Twitter</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -244,7 +244,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
                 placeholder="Twitter"
               />
             </div>
-            <div className="w-1/4">
+            <div className="w-full lg:w-1/4">
               <label htmlFor="">LinkedIn</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
@@ -254,7 +254,7 @@ const ProfileModal = ({ isOpen, reader, modalClose }) => {
                 placeholder="LinkedIn"
               />
             </div>
-            <div className="w-1/4">
+            <div className="w-full lg:w-1/4">
               <label htmlFor="">Instagram</label>
               <input
                 className="px-3 py-2 w-full mt-1 outline-none text-black"
