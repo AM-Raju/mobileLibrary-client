@@ -33,7 +33,7 @@ const Profile = () => {
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
       <h2 className="text-5xl text-center font-semibold ">Profile</h2>
-      <div className=" relative max-w-7xl mx-auto px-10 py-20 bg-orange-500 mt-10 grid grid-cols-3">
+      <div className=" relative max-w-7xl mx-auto px-10 py-20 bg-orange-500 mt-10 grid grid-cols-1 md:grid-cols-3">
         {/* Image block */}
         <div className="w-fit mx-auto ">
           {reader?.profilePic ? (
@@ -49,7 +49,7 @@ const Profile = () => {
           </div>
         </div>
         {/* Text block */}
-        <div className="col-span-2  text-white">
+        <div className="col-span-2  text-white mt-10 md:mt-0 md:ml-10">
           <div className="space-y-1 tracking-wide">
             <h3 className="text-2xl font-semibold">Name: {reader?.name}</h3>
             <p>
