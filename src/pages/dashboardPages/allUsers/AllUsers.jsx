@@ -42,64 +42,66 @@ const AllUsers = () => {
   };
 
   return (
-    <section className="py-10 h-full bg-slate-300">
+    <section className="bg-slate-300 h-full">
       <Helmet>
         <title>Users | Dashboard-MobileLibrary</title>
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
-      <h2 className="text-5xl text-center font-semibold mb-10">All Users</h2>
-      <div className="w-8/12 mx-auto overflow-x-auto">
-        <table className="table h-fit">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>SN</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Change Role</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody className="h-fit">
-            {!loading &&
-              readers.map((reader, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{reader.name ? reader?.name : "Unknown"}</td>
-                  <td className="w-40 font-semibold">{reader?.email}</td>
-                  <td>{reader?.role}</td>
-                  <td className="w-48">
-                    <button
-                      onClick={() => makeModerator(reader?.email)}
-                      disabled={reader?.role === "admin" || reader?.role === "moderator"}
-                      className={`${
-                        reader?.role === "admin" || reader?.role === "moderator"
-                          ? "bg-gray-500"
-                          : "bg-orange-500"
-                      } px-4 py-2 rounded font-semibold  tracking-wider`}
-                    >
-                      Make Moderator
-                    </button>
-                  </td>
-
-                  <td>
-                    <button
-                      onClick={() => handleDeleteUser(reader?.email)}
-                      disabled={role !== "admin"}
-                      className="hover:bg-[#F55653] px-4 py-2 rounded group"
-                    >
-                      <FaTrash
+      <div className=" py-10 h-full w-[330px] mx-auto sm:w-[622px] md:w-full ">
+        <h2 className="text-5xl text-center font-semibold mb-10">All Users</h2>
+        <div className="w-full sm:w-10/12  mx-auto overflow-x-auto ">
+          <table className="table h-fit">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Change Role</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody className="h-fit">
+              {!loading &&
+                readers.map((reader, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{reader.name ? reader?.name : "Unknown"}</td>
+                    <td className="w-40 font-semibold">{reader?.email}</td>
+                    <td>{reader?.role}</td>
+                    <td className="w-48">
+                      <button
+                        onClick={() => makeModerator(reader?.email)}
+                        disabled={reader?.role === "admin" || reader?.role === "moderator"}
                         className={`${
-                          role === "admin" ? "text-red-500" : "text-gray-500"
-                        } group-hover:text-white text-xl`}
-                      ></FaTrash>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+                          reader?.role === "admin" || reader?.role === "moderator"
+                            ? "bg-gray-500"
+                            : "bg-orange-500"
+                        } px-4 py-2 rounded font-semibold  tracking-wider`}
+                      >
+                        Make Moderator
+                      </button>
+                    </td>
+
+                    <td>
+                      <button
+                        onClick={() => handleDeleteUser(reader?.email)}
+                        disabled={role !== "admin"}
+                        className="hover:bg-[#F55653] px-4 py-2 rounded group"
+                      >
+                        <FaTrash
+                          className={`${
+                            role === "admin" ? "text-red-500" : "text-gray-500"
+                          } group-hover:text-white text-xl`}
+                        ></FaTrash>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );
