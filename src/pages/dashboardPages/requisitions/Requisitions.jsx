@@ -59,7 +59,7 @@ const Requisitions = () => {
         <title>Requisitions | Dashboard-MobileLibrary</title>
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
-      <div className="py-10 h-full w-[330px] mx-auto sm:w-[622px] md:w-full">
+      <div className="py-10 h-full w-[330px] mx-auto sm:w-[622px] xl:w-full">
         <h2 className="text-5xl text-center font-semibold mb-10">Requisitions</h2>
         <div className="w-10/12 mx-auto overflow-x-auto">
           <table className="table h-fit">
