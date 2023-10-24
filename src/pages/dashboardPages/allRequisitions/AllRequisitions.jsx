@@ -23,7 +23,7 @@ const AllRequisitions = () => {
   });
 
   return (
-    <section className="bg-slate-300 h-screen max-h-full relative">
+    <section className="bg-slate-300 h-screen max-h-full ">
       <Helmet>
         <title>Requisitions | Dashboard-MobileLibrary</title>
         <link rel="icon" type="image/svg+xml" href={favicon} />

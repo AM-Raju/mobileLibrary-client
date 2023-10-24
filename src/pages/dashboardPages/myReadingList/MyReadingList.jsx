@@ -25,76 +25,81 @@ const MyReadingList = () => {
   });
 
   return (
-    <section className="py-10 h-full bg-slate-300">
+    <section className="h-screen lg:h-full bg-slate-300">
       <Helmet>
         <title>My Reading List | Dashboard-MobileLibrary</title>
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
-      <h2 className="text-5xl text-center font-semibold mb-10">My Reading List</h2>
-      <div className="w-10/12 mx-auto overflow-x-auto">
-        <table className="table h-fit">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>SN</th>
-              <th>Moderator Email</th>
-              <th>Reader Email</th>
-              <th>Book Info</th>
-              <th>City</th>
-              <th>Spot</th>
-              <th>Moderator Status</th>
-              <th>Reader Status</th>
-            </tr>
-          </thead>
-          <tbody className="h-fit">
-            {!loading &&
-              requisitions.map((requisition, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>
-                    <ModeratorInfo
-                      email={requisition?.moderatorEmail}
-                      index={index}
-                    ></ModeratorInfo>
-                  </td>
+      <div className="h-full py-10 w-[360px] sm:w-[622px] md:w-[720px] xl:w-full mx-auto">
+        {/*       <div className="py-10 h-full w-[330px] mx-auto  xl:w-full"> */}
+        <h2 className="text-4xl lg:text-5xl text-center font-semibold mb-10">My Reading List</h2>
+        <div className="w-[90%] mx-auto overflow-x-auto">
+          <table className="table h-fit">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>SN</th>
+                <th>Moderator Email</th>
+                <th>Reader Email</th>
+                <th>Book Info</th>
+                <th>City</th>
+                <th>Spot</th>
+                <th>Moderator Status</th>
+                <th>Reader Status</th>
+              </tr>
+            </thead>
+            <tbody className="h-fit">
+              {!loading &&
+                requisitions.map((requisition, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <ModeratorInfo
+                        email={requisition?.moderatorEmail}
+                        index={index}
+                      ></ModeratorInfo>
+                    </td>
 
-                  <td>
-                    <ReaderInfo
-                      email={requisition?.userEmail}
-                      bookId={requisition?.bookId}
-                    ></ReaderInfo>
-                  </td>
+                    <td>
+                      <ReaderInfo
+                        email={requisition?.userEmail}
+                        bookId={requisition?.bookId}
+                      ></ReaderInfo>
+                    </td>
 
-                  <td>
-                    <BookInfo
-                      bookId={requisition?.bookId}
-                      email={requisition?.userEmail}
-                    ></BookInfo>
-                  </td>
-                  <td className="w-40 ">{requisition?.city}</td>
-                  <td>{requisition?.spot}</td>
-                  <td
-                    className={`${
-                      requisition?.moderatorStatus === "received" ? "text-green-600" : "text-black"
-                    }
+                    <td>
+                      <BookInfo
+                        bookId={requisition?.bookId}
+                        email={requisition?.userEmail}
+                      ></BookInfo>
+                    </td>
+                    <td className="w-40 ">{requisition?.city}</td>
+                    <td>{requisition?.spot}</td>
+                    <td
+                      className={`${
+                        requisition?.moderatorStatus === "received"
+                          ? "text-green-600"
+                          : "text-black"
+                      }
                     ${
                       requisition?.moderatorStatus === "delivered" ? "text-red-500" : "text-black"
                     }`}
-                  >
-                    {requisition?.moderatorStatus}
-                  </td>
-                  <td
-                    className={`${
-                      requisition?.readerStatus === "received" ? "text-red-500" : "text-black"
-                    } 
+                    >
+                      {requisition?.moderatorStatus}
+                    </td>
+                    <td
+                      className={`${
+                        requisition?.readerStatus === "received" ? "text-red-500" : "text-black"
+                      } 
                     ${requisition?.readerStatus === "returned" ? "text-green-600" : "text-black"}`}
-                  >
-                    {requisition?.readerStatus}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+                    >
+                      {requisition?.readerStatus}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );
