@@ -20,6 +20,8 @@ import MyReadingList from "../pages/dashboardPages/myReadingList/MyReadingList";
 import AllRequisitions from "../pages/dashboardPages/allRequisitions/AllRequisitions";
 import Profile from "../pages/dashboardPages/profile/Profile";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
 
 const router = createBrowserRouter([
   {
@@ -85,48 +87,80 @@ const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
-      </PrivateRoute>
-    ),
+    element: <DashboardLayout></DashboardLayout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard/",
-        element: <DashboardHome></DashboardHome>,
+        element: (
+          <PrivateRoute>
+            <DashboardHome></DashboardHome>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/profile",
-        element: <Profile></Profile>,
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/all-users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-books-data",
-        element: <AllBooksData></AllBooksData>,
+        element: (
+          <AdminRoute>
+            <AllBooksData></AllBooksData>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-requisitions",
-        element: <AllRequisitions></AllRequisitions>,
+        element: (
+          <AdminRoute>
+            <AllRequisitions></AllRequisitions>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/add-book",
-        element: <AddBook></AddBook>,
+        element: (
+          <ModeratorRoute>
+            <AddBook></AddBook>
+          </ModeratorRoute>
+        ),
       },
       {
         path: "/dashboard/add-author",
-        element: <AddAuthor></AddAuthor>,
+        element: (
+          <ModeratorRoute>
+            <AddAuthor></AddAuthor>
+          </ModeratorRoute>
+        ),
       },
       {
         path: "/dashboard/requisitions",
-        element: <Requisitions></Requisitions>,
+        element: (
+          <ModeratorRoute>
+            <Requisitions></Requisitions>
+          </ModeratorRoute>
+        ),
       },
       {
         path: "/dashboard/my-reading-list",
-        element: <MyReadingList></MyReadingList>,
+        element: (
+          <PrivateRoute>
+            <MyReadingList></MyReadingList>
+          </PrivateRoute>
+        ),
       },
     ],
   },
