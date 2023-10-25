@@ -27,7 +27,7 @@ const Profile = () => {
     setIsOpen(false);
   };
   return (
-    <section className="py-10 h-full bg-slate-300">
+    <section className="py-10 h-screen lg:h-full bg-slate-300">
       <Helmet>
         <title>Profile | Dashboard-MobileLibrary</title>
         <link rel="icon" type="image/svg+xml" href={favicon} />

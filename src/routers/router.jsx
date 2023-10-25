@@ -19,6 +19,7 @@ import Requisitions from "../pages/dashboardPages/requisitions/Requisitions";
 import MyReadingList from "../pages/dashboardPages/myReadingList/MyReadingList";
 import AllRequisitions from "../pages/dashboardPages/allRequisitions/AllRequisitions";
 import Profile from "../pages/dashboardPages/profile/Profile";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,24 +33,44 @@ const router = createBrowserRouter([
       },
       {
         path: "/free-ebooks",
-        element: <FreeEbooks></FreeEbooks>,
+        element: (
+          <PrivateRoute>
+            <FreeEbooks></FreeEbooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/special-books",
-        element: <AllBooks></AllBooks>,
+        element: (
+          <PrivateRoute>
+            <AllBooks></AllBooks>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/bookDetails/:id",
-        element: <BookDetails></BookDetails>,
+        element: (
+          <PrivateRoute>
+            <BookDetails></BookDetails>
+          </PrivateRoute>
+        ),
         loader: ({ params }) => fetch(`http://localhost:5000/book-details/${params.id}`),
       },
       {
         path: "/all-authors",
-        element: <AllAuthors></AllAuthors>,
+        element: (
+          <PrivateRoute>
+            <AllAuthors></AllAuthors>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/pricing",
-        element: <MembershipPlan></MembershipPlan>,
+        element: (
+          <PrivateRoute>
+            <MembershipPlan></MembershipPlan>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signup",
@@ -64,7 +85,11 @@ const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {

@@ -82,7 +82,7 @@ const AllBooksData = () => {
         <link rel="icon" type="image/svg+xml" href={favicon} />
       </Helmet>
       {!isLoading && (
-        <section className="bg-slate-300 h-screen max-h-full relative">
+        <section className="bg-slate-300 h-full relative">
           <div className="py-10 h-full w-[330px] mx-auto sm:w-[622px] md:w-full">
             <h2 className="text-5xl text-center font-semibold mb-10">All Books</h2>
 

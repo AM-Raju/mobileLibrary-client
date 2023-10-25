@@ -47,6 +47,10 @@ const Navbar = () => {
       path: "#",
       title: "Contact Us",
     },
+    {
+      path: "/dashboard",
+      title: "Dashboard",
+    },
   ];
 
   return (
