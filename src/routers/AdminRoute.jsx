@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
   if (role !== "admin") {
     return <RestrictionPage role={"Admin"}></RestrictionPage>;
   }
-  if (role !== "admin") {
+  if (role == "admin") {
     return children;
   }
   return <Navigate to="/" state={{ from: location }} replace></Navigate>;
