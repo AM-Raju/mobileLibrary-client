@@ -81,7 +81,7 @@ const Login = () => {
 
             <div className="w-full">
               <button
-                className="block hover:bg-[#F55653] border hover:border-red-500 text-xl text-white px-7 py-2 w-full"
+                className="block hover:bg-[#F55653] border hover:border-[#F55653] text-xl text-white px-7 py-2 w-full"
                 type="submit"
               >
                 Login

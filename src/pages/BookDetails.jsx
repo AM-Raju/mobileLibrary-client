@@ -56,7 +56,7 @@ const BookDetails = () => {
       <div className="my-5 2xl:flex mx-auto  lg:w-10/12">
         <div className="relative w-fit mx-auto">
           <img className="w-96" src={book?.cover} alt="" />
-          <p className="absolute top-3 right-3 bg-white text-red-500 font-semibold px-3 py-1 shadow-md">
+          <p className="absolute top-3 right-3 bg-white text-[#F55653] font-semibold px-3 py-1 shadow-md">
             Available Copy: {book?.qty}
           </p>
         </div>

@@ -7,7 +7,7 @@ const Accordion = ({ book, author }) => {
   const { name, country } = author;
   const [activeTab, setActiveTab] = useState("Short Description");
   return (
-    <div className="border border-red-500">
+    <div className="border border-[#F55653]">
       {/* Accordion tab */}
 
       <div className="flex">
@@ -15,7 +15,7 @@ const Accordion = ({ book, author }) => {
           onClick={() => setActiveTab("Short Description")}
           className={`${
             activeTab === "Short Description" ? "bg-[#F55653] text-white" : ""
-          }  px-2 md:px-5 py-2 border border-red-500 border-t-0 border-l-0`}
+          }  px-2 md:px-5 py-2 border border-[#F55653] border-t-0 border-l-0`}
         >
           Short Description
         </button>
@@ -23,7 +23,7 @@ const Accordion = ({ book, author }) => {
           onClick={() => setActiveTab("Specifications")}
           className={`${
             activeTab === "Specifications" ? "bg-[#F55653] text-white" : ""
-          }  px-2 md:px-5 py-2 border border-red-500 border-t-0 border-l-0`}
+          }  px-2 md:px-5 py-2 border border-[#F55653] border-t-0 border-l-0`}
         >
           Specifications
         </button>
@@ -31,7 +31,7 @@ const Accordion = ({ book, author }) => {
           onClick={() => setActiveTab("Author")}
           className={`${
             activeTab === "Author" ? "bg-[#F55653] text-white" : ""
-          }  px-2 md:px-5 py-2 border border-red-500 border-t-0 border-l-0`}
+          }  px-2 md:px-5 py-2 border border-[#F55653] border-t-0 border-l-0`}
         >
           Author
         </button>

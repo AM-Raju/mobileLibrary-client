@@ -126,7 +126,7 @@ const RequisitionModal = ({ bookId, refetch, isOpen, closeModal, reloadData }) =
     <div className="z-10 flex justify-center items-center bg-slate-500 bg-opacity-50 fixed w-screen h-screen top-0 left-0 ">
       <div className="bg-white lg:w-8/12 2xl:w-6/12 min-w-72 h-fit lg:h-56 p-10 rounded-md relative mx-auto">
         <button onClick={handleCloseModal}>
-          <FaRegCircleXmark className="text-3xl bg-white rounded-full text-red-500 absolute -top-2 -right-2"></FaRegCircleXmark>
+          <FaRegCircleXmark className="text-3xl bg-white rounded-full text-[#F55653] absolute -top-2 -right-2"></FaRegCircleXmark>
         </button>
         <form onSubmit={handleRequisitionData} action="">
           <div className="flex flex-col lg:flex-row justify-around gap-y-10 lg:gap-x-10 w-fit mx-auto">

@@ -28,7 +28,7 @@ const AllAuthors = () => {
       </Helmet>
       {!loading && (
         <div className="lg:mx-5">
-          <div className="bg-red-500 h-48 flex items-center justify-center 2xl:hidden">
+          <div className="bg-[#F55653] h-48 flex items-center justify-center 2xl:hidden">
             <h1 className="text-6xl font-semibold text-white text-center">Authors</h1>
           </div>
           <div className="hidden 2xl:block">

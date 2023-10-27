@@ -9,7 +9,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, logout, updatedUser } = useContext(AuthContext);
+  const { user, role, logout, updatedUser } = useContext(AuthContext);
 
   /* States */
   const [open, setOpen] = useState(false);
@@ -44,8 +44,8 @@ const Navbar = () => {
       title: "Pricing",
     },
     {
-      path: "#",
-      title: "Contact Us",
+      path: "/about",
+      title: "About Us",
     },
     {
       path: "/dashboard",
@@ -101,21 +101,21 @@ const Navbar = () => {
             <div className="flex items-center">
               {/* User name/email and role */}
               {user && (
-                <div className="mr-1">
+                <div className="mr-1 text-right">
                   <p className="font-semibold">
                     {updatedUser?.name ? updatedUser?.name : user?.email}
                   </p>
-                  <p className="text-sm text-red-500">{updatedUser?.role}</p>
+                  <p className="text-sm text-[#F55653]">{updatedUser?.role}</p>
                 </div>
               )}
               <div className="dropdown dropdown-end">
                 {/* user pic */}
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar ">
-                  <div className="w-10 rounded-full  border-2 border-red-500 ">
+                  <div className="w-10 rounded-full  border-2 border-[#F55653] ">
                     {user ? (
                       <img src={updatedUser?.profilePic} />
                     ) : (
-                      <FaRegUser className="text-2xl my-auto mx-auto mt-1 text-red-500"></FaRegUser>
+                      <FaRegUser className="text-2xl my-auto mx-auto mt-1 text-[#F55653]"></FaRegUser>
                     )}
                   </div>
                 </label>
@@ -130,11 +130,13 @@ const Navbar = () => {
                           Profile
                         </ButtonOutline>
                       </li>
-                      <li className="mt-2">
-                        <ButtonOutline path={"/dashboard/"} addedClass={"w-full py-1"}>
-                          Dashboard
-                        </ButtonOutline>
-                      </li>
+                      {role !== "reader" && (
+                        <li className="mt-2">
+                          <ButtonOutline path={"/dashboard/"} addedClass={"w-full py-1"}>
+                            Dashboard
+                          </ButtonOutline>
+                        </li>
+                      )}
                       <li className="mt-2">
                         <ButtonOutline onClick={handleLogout} addedClass={"w-full py-1"}>
                           Sign Out

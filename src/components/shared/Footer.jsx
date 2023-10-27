@@ -31,7 +31,7 @@ const Footer = () => {
           <Link to="#">Privacy Policy </Link>
           <Link to="#">Term and Conditions </Link>
           <Link to="#">Membership Plan </Link>
-          <Link to="#">Contact </Link>
+          <Link to="#">About Us </Link>
         </div>
       </div>
     </div>

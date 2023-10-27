@@ -92,7 +92,7 @@ const AllUsers = () => {
                       >
                         <FaTrash
                           className={`${
-                            role === "admin" ? "text-red-500" : "text-gray-500"
+                            role === "admin" ? "text-[#F55653]" : "text-gray-500"
                           } group-hover:text-white text-xl`}
                         ></FaTrash>
                       </button>

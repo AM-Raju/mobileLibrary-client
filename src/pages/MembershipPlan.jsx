@@ -57,7 +57,7 @@ const MembershipPlan = () => {
             showMyModal={showMyModal}
           ></Plan>
         </div>
-        <p className="text-red-500 mb-10">
+        <p className="text-[#F55653] mb-10">
           * Top 20 readers/category will be eligible for gift coupon each year.
         </p>
       </Container>

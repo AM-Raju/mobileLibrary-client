@@ -22,6 +22,8 @@ import Profile from "../pages/dashboardPages/profile/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
+import AboutUs from "../pages/AboutUs";
+import PaidReaderRoute from "./PaidReaderRoute";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +75,10 @@ const router = createBrowserRouter([
             <MembershipPlan></MembershipPlan>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/about",
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "/signup",
@@ -157,9 +163,9 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-reading-list",
         element: (
-          <PrivateRoute>
+          <PaidReaderRoute>
             <MyReadingList></MyReadingList>
-          </PrivateRoute>
+          </PaidReaderRoute>
         ),
       },
     ],

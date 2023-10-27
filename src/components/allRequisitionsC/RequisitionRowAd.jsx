@@ -67,12 +67,12 @@ const RequisitionRowAd = ({ requisition, index, refetch }) => {
         <td>{spot}</td>
         <td
           className={`${moderatorStatus === "received" ? "text-green-600" : "text-black"}
-                ${moderatorStatus === "delivered" ? "text-red-500" : "text-black"}`}
+                ${moderatorStatus === "delivered" ? "text-[#F55653]" : "text-black"}`}
         >
           {moderatorStatus}
         </td>
         <td
-          className={`${readerStatus === "received" ? "text-red-500" : "text-black"} 
+          className={`${readerStatus === "received" ? "text-[#F55653]" : "text-black"} 
                 ${readerStatus === "returned" ? "text-green-600" : "text-black"}`}
         >
           {readerStatus}

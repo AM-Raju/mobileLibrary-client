@@ -82,14 +82,14 @@ const MyReadingList = () => {
                           : "text-black"
                       }
                     ${
-                      requisition?.moderatorStatus === "delivered" ? "text-red-500" : "text-black"
+                      requisition?.moderatorStatus === "delivered" ? "text-[#F55653]" : "text-black"
                     }`}
                     >
                       {requisition?.moderatorStatus}
                     </td>
                     <td
                       className={`${
-                        requisition?.readerStatus === "received" ? "text-red-500" : "text-black"
+                        requisition?.readerStatus === "received" ? "text-[#F55653]" : "text-black"
                       } 
                     ${requisition?.readerStatus === "returned" ? "text-green-600" : "text-black"}`}
                     >

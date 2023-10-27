@@ -17,7 +17,7 @@ const ErrorPage = () => {
       </Helmet>
       <div className=" absolute top-52 2xl:left-2/3 2xl:mr-10">
         <div className="max-w-xl text-center">
-          <h2 className="mb-8 font-extrabold text-9xl text-red-500">
+          <h2 className="mb-8 font-extrabold text-9xl text-[#F55653]">
             <span className="sr-only">Error</span>
             {status || 404}
           </h2>
