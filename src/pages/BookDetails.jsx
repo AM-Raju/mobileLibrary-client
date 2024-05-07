@@ -20,6 +20,8 @@ const BookDetails = () => {
       setBtnDisabled(true);
     } else if (role === "premium reader" && requisitionCount === 2) {
       setBtnDisabled(true);
+    } else if (role === "reader") {
+      setBtnDisabled(true);
     } else if (role === "moderator") {
       setBtnDisabled(true);
     } else if (role === "admin") {
@@ -38,7 +40,7 @@ const BookDetails = () => {
   };
 
   const reloadData = () => {
-    fetch(`http://localhost:5000/book-details/${book._id}`)
+    fetch(`https://mobile-library-server.vercel.app/book-details/${book._id}`)
       .then((res) => res.json())
       .then((data) => {
         setBook(data);

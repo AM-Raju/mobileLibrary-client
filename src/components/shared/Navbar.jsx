@@ -17,7 +17,8 @@ const Navbar = () => {
   const handleLogout = () => {
     logout()
       .then(() => {
-        toast.success("Succesful signout");
+        toast.success("Succesfully signout");
+        localStorage.removeItem("access_token");
       })
       .catch((error) => console.log(error.message));
   };
@@ -46,10 +47,6 @@ const Navbar = () => {
     {
       path: "/about",
       title: "About Us",
-    },
-    {
-      path: "/dashboard",
-      title: "Dashboard",
     },
   ];
 

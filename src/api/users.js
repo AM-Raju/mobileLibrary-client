@@ -1,5 +1,5 @@
 export const getUserInfo = async (email) => {
-  const response = await fetch(`http://localhost:5000/users/${email}`);
+  const response = await fetch(`https://mobile-library-server.vercel.app/users/${email}`);
   const user = await response.json();
   return user;
 };

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://mobile-library-server.vercel.app",
 });
 
 const useAxiosSecure = () => {
@@ -15,6 +15,7 @@ const useAxiosSecure = () => {
     // Request interception
     axiosSecure.interceptors.request.use((config) => {
       const token = localStorage.getItem("access_token");
+      console.log("Token from axiosSecure", token);
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

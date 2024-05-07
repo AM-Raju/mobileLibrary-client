@@ -58,23 +58,16 @@ const router = createBrowserRouter([
             <BookDetails></BookDetails>
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/book-details/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://mobile-library-server.vercel.app/book-details/${params.id}`),
       },
       {
         path: "/all-authors",
-        element: (
-          <PrivateRoute>
-            <AllAuthors></AllAuthors>
-          </PrivateRoute>
-        ),
+        element: <AllAuthors></AllAuthors>,
       },
       {
         path: "/pricing",
-        element: (
-          <PrivateRoute>
-            <MembershipPlan></MembershipPlan>
-          </PrivateRoute>
-        ),
+        element: <MembershipPlan></MembershipPlan>,
       },
       {
         path: "/about",

@@ -4,10 +4,10 @@ import { AuthContext } from "../providers/AuthProvider";
 import { ImSpinner2 } from "react-icons/im";
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  if (!user) {
+  if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
         <div className="relative bottom-20">

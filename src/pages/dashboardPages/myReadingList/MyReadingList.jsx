@@ -39,8 +39,8 @@ const MyReadingList = () => {
             <thead>
               <tr>
                 <th>SN</th>
-                <th>Moderator Email</th>
-                <th>Reader Email</th>
+                <th>Moderator Email/Name</th>
+                <th>Reader Email/Name</th>
                 <th>Book Info</th>
                 <th>City</th>
                 <th>Spot</th>

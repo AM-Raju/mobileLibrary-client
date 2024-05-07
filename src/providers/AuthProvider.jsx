@@ -69,10 +69,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log("Current user", currentUser);
       if (currentUser) {
-        axios.post("http://localhost:5000/jwt", { email: currentUser?.email }).then((res) => {
-          console.log(res.data.token);
-          localStorage.setItem("access_token", res.data.token);
-        });
+        axios
+          .post("https://mobile-library-server.vercel.app/jwt", { email: currentUser?.email })
+          .then((res) => {
+            console.log("Token from LocalStorage", res.data.token);
+            localStorage.setItem("access_token", res.data.token);
+          });
+      } else {
+        localStorage.removeItem("access_token");
       }
       setLoading(false);
     });

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PiWarningBold } from "react-icons/pi";
+
+import { Link } from "react-router-dom";
 
 const RestrictionPage = ({ role }) => {
   return (

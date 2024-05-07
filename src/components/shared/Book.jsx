@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import AuthorTitleAndCountry from "./AuthorTitleAndCountry";
 import { AuthContext } from "../../providers/AuthProvider";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init({ duration: 800 });
 
 const Book = ({ book, openModal }) => {
   const { user, role, requisitionCount } = useContext(AuthContext);
@@ -13,9 +17,13 @@ const Book = ({ book, openModal }) => {
       setBtnDisabled(true);
     } else if (role === "premium reader" && requisitionCount === 2) {
       setBtnDisabled(true);
+    } else if (role === "reader") {
+      setBtnDisabled(true);
     } else if (role === "moderator") {
       setBtnDisabled(true);
     } else if (role === "admin") {
+      setBtnDisabled(true);
+    } else if (!user) {
       setBtnDisabled(true);
     } else {
       setBtnDisabled(false);
@@ -23,7 +31,7 @@ const Book = ({ book, openModal }) => {
   }, [role, user?.email, requisitionCount]);
 
   return (
-    <div className="">
+    <div data-aos="zoom-in">
       <div className="w-fit p-6 xl:max-2xl:p-2 border box-border hover:border-gray-700 transition-all duration-300 h-96 xl:max-2xl:h-80">
         <div className="flex">
           <img className="w-36" src={cover} alt="" />

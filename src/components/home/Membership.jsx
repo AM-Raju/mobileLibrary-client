@@ -3,6 +3,10 @@ import Container from "../shared/Container";
 
 import ButtonOutline from "../shared/ButtonOutline";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init({ duration: 800 });
 
 const Membership = () => {
   return (
@@ -25,13 +29,22 @@ const Membership = () => {
       <Container>
         {/* Plans */}
         <div className="sm:flex">
-          <div className="sm:w-[512px] bg-[#339DB3] h-40 flex justify-center items-center text-5xl sm:max-md:text-4xl text-gray-200 font-semibold ">
+          <div
+            data-aos="fade-left"
+            className="sm:w-[512px] bg-[#339DB3] h-40 flex justify-center items-center text-5xl sm:max-md:text-4xl text-gray-200 font-semibold "
+          >
             Free
           </div>
-          <div className="sm:w-[512px] bg-[#3E73A7] h-40 flex justify-center items-center text-5xl sm:max-md:text-4xl text-gray-200 font-semibold">
+          <div
+            data-aos="fade-down"
+            className="sm:w-[512px] bg-[#3E73A7] h-40 flex justify-center items-center text-5xl sm:max-md:text-4xl text-gray-200 font-semibold"
+          >
             Standard
           </div>
-          <div className="sm:w-[512px] bg-[#F55653] h-40 flex justify-center items-center text-5xl sm:max-md:text-4xl font-semibold text-gray-200">
+          <div
+            data-aos="fade-right"
+            className="sm:w-[512px] bg-[#F55653] h-40 flex justify-center items-center text-5xl sm:max-md:text-4xl font-semibold text-gray-200"
+          >
             Premium
           </div>
         </div>

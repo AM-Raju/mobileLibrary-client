@@ -11,7 +11,7 @@ const DashboardNav = () => {
       {/* Sidebar content here */}
 
       <li>
-        <Link className="block w-full font-semibold pr-3 py-2" to="/">
+        <Link className="block w-full font-semibold pr-3 pt-2" to="/">
           Home
         </Link>
       </li>
